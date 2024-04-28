@@ -1,4 +1,4 @@
-package org.example;
+package org.example.domain.utils;
 
 import org.example.domain.entity.People;
 import org.example.domain.entity.ShowProgram;

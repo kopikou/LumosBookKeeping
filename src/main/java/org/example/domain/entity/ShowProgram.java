@@ -43,13 +43,30 @@ public class ShowProgram {
             inverseJoinColumns = { @JoinColumn(name = "id_transfer") })
     private List<People> transfers;
 
+    public ShowProgram(){
+
+    }
+    public ShowProgram(String title, int price, int artistsCnt, int techniciansCnt, int transferCnt, int artistSalary, int technicianSalary, int transferCost, List<People> artists, List<People> technicians, List<People> transfers) {
+        this.title = title;
+        this.price = price;
+        this.artistsCnt = artistsCnt;
+        this.techniciansCnt = techniciansCnt;
+        this.transferCnt = transferCnt;
+        this.artistSalary = artistSalary;
+        this.technicianSalary = technicianSalary;
+        this.transferCost = transferCost;
+        this.artists = artists;
+        this.technicians = technicians;
+        this.transfers = transfers;
+    }
+
 
     public int getId() {
         return id;
     }
-    public void setId(int id) {
+    /*public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public String getTitle() {
         return title;
@@ -126,6 +143,27 @@ public class ShowProgram {
     }
     public void setTransfers(List<People> transfers) {
         this.transfers = transfers;
+    }
+
+    public void addArtist(People people){
+        artists.add(people);
+    }
+    public void removeArtist(People people){
+        artists.remove(people);
+    }
+
+    public void addTechnician(People people){
+        technicians.add(people);
+    }
+    public void removeTechnician(People people){
+        technicians.remove(people);
+    }
+
+    public void addTransfer(People people){
+        transfers.add(people);
+    }
+    public void removeTransfer(People people){
+        transfers.remove(people);
     }
 
     @Override

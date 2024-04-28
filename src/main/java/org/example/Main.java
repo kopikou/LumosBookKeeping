@@ -1,9 +1,9 @@
 package org.example;
 
-import org.example.domain.entity.People;
 import org.example.domain.entity.ShowProgram;
+import org.example.domain.services.ShowProgramService;
+import org.example.domain.utils.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -11,6 +11,11 @@ import java.util.List;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        ShowProgramService showProgramService = new ShowProgramService();
+        List<ShowProgram> showPrograms = showProgramService.findAllShowPrograms();
+        for(ShowProgram showProgram:showPrograms){
+            System.out.println(showProgram);
+        }
         /*Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -83,12 +88,12 @@ public class Main {
             System.out.println(minister);
         }
         session.close();*/
-        Session session = HibernateUtil.getSession();
+        /*Session session = HibernateUtil.getSession();
         List<ShowProgram> artists = session.createQuery("from ShowProgram").list();
         for(ShowProgram artist:artists){
             System.out.println(artist);
         }
-        session.close();
+        session.close();*/
 
 
 
