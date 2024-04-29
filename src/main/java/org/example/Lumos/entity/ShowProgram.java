@@ -1,8 +1,7 @@
-package org.example.domain.entity;
+package org.example.Lumos.entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

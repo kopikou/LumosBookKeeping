@@ -1,7 +1,7 @@
-package org.example.domain.utils;
+package org.example.Lumos.utils;
 
-import org.example.domain.entity.People;
-import org.example.domain.entity.ShowProgram;
+import org.example.Lumos.entity.People;
+import org.example.Lumos.entity.ShowProgram;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

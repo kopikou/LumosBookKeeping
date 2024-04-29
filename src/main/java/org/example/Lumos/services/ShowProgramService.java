@@ -1,7 +1,7 @@
-package org.example.domain.services;
+package org.example.Lumos.services;
 
-import org.example.domain.dao.ShowProgramDaoImpl;
-import org.example.domain.entity.ShowProgram;
+import org.example.Lumos.dao.ShowProgramDaoImpl;
+import org.example.Lumos.entity.ShowProgram;
 
 import java.util.List;
 
