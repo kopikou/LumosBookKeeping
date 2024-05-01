@@ -48,4 +48,7 @@ public class MainWindowView extends JFrame {
     public JTable getIncomeExpensesTable(){
         return incomeExpensesTable;
     }
+    public JButton getAddOrderButton(){
+        return addOrderButton;
+    }
 }
