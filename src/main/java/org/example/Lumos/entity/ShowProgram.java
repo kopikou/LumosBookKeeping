@@ -41,11 +41,13 @@ public class ShowProgram {
             joinColumns = { @JoinColumn(name = "id_show") },
             inverseJoinColumns = { @JoinColumn(name = "id_transfer") })
     private List<People> transfers;
+    @OneToMany(mappedBy = "showProgram",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Income> incomes;
 
     public ShowProgram(){
 
     }
-    public ShowProgram(String title, int price, int artistsCnt, int techniciansCnt, int transferCnt, int artistSalary, int technicianSalary, int transferCost, List<People> artists, List<People> technicians, List<People> transfers) {
+    public ShowProgram(String title, int price, int artistsCnt, int techniciansCnt, int transferCnt, int artistSalary, int technicianSalary, int transferCost, List<People> artists, List<People> technicians, List<People> transfers, List<Income> incomes) {
         this.title = title;
         this.price = price;
         this.artistsCnt = artistsCnt;
@@ -57,8 +59,8 @@ public class ShowProgram {
         this.artists = artists;
         this.technicians = technicians;
         this.transfers = transfers;
+        this.incomes = incomes;
     }
-
 
     public int getId() {
         return id;
@@ -144,6 +146,13 @@ public class ShowProgram {
         this.transfers = transfers;
     }
 
+    public List<Income> getIncomes() {
+        return incomes;
+    }
+    public void setIncomes(List<Income> incomes) {
+        this.incomes = incomes;
+    }
+
     public void addArtist(People people){
         artists.add(people);
     }
@@ -165,6 +174,13 @@ public class ShowProgram {
         transfers.remove(people);
     }
 
+    public void addIncome(Income income){
+        incomes.add(income);
+    }
+    public void removeIncome(Income income){
+        incomes.remove(income);
+    }
+
     @Override
     public String toString() {
         return "ShowProgram{" +
@@ -179,7 +195,6 @@ public class ShowProgram {
                 ", transferCost=" + transferCost +
                 ", artists=" + artists +
                 ", technicians=" + technicians +
-                ", transfers=" + transfers +
-                '}';
+                ", transfers=" + transfers;
     }
 }

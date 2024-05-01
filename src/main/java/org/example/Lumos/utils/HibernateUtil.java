@@ -1,5 +1,7 @@
 package org.example.Lumos.utils;
 
+import org.example.Lumos.entity.Expense;
+import org.example.Lumos.entity.Income;
 import org.example.Lumos.entity.People;
 import org.example.Lumos.entity.ShowProgram;
 import org.hibernate.Session;
@@ -13,7 +15,7 @@ public class HibernateUtil {
     static {
         File cfgFile = new File("hibernate.cfg.xml");
         sessionFactory = new Configuration().configure(cfgFile)
-                .addAnnotatedClass(People.class).addAnnotatedClass(ShowProgram.class).buildSessionFactory();
+                .addAnnotatedClass(People.class).addAnnotatedClass(ShowProgram.class).addAnnotatedClass(Income.class).addAnnotatedClass(Expense.class).buildSessionFactory();
     }
     public static Session getSession(){
         return sessionFactory.openSession();
