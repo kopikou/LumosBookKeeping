@@ -1,30 +1,17 @@
 package org.example.Lumos.services;
 
-import org.example.Lumos.dao.ExpenseDaoImpl;
 import org.example.Lumos.entity.Expense;
 
 import java.util.List;
 
-public class ExpenseService {
-    private ExpenseDaoImpl expenseDao = new ExpenseDaoImpl();
-    public ExpenseService(){}
-    public Expense findExpense(int id) {
-        return expenseDao.findById(id);
-    }
+public interface ExpenseService {
+    Expense findExpense(int id);
 
-    public void saveExpense(Expense expense) {
-        expenseDao.save(expense);
-    }
+    void saveExpense(Expense expense);
 
-    public void deleteExpense(Expense expense) {
-        expenseDao.delete(expense);
-    }
+    void deleteExpense(Expense expense);
 
-    public void updateExpense(Expense expense) {
-        expenseDao.update(expense);
-    }
+    void updateExpense(Expense expense);
 
-    public List<Expense> findAllExpense() {
-        return expenseDao.findAll();
-    }
+    List<Expense> findAllExpense();
 }

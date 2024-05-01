@@ -3,6 +3,7 @@ package org.example.Lumos.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="people")
@@ -20,6 +21,9 @@ public class People {
     public People(String name, List<Expense> expenses) {
         this.name = name;
         this.expenses = expenses;
+    }
+    public People(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -48,5 +52,18 @@ public class People {
         return "People{" +
                 "id=" + id +
                 ", name='" + name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof People)) return false;
+        People people = (People) o;
+        return getId() == people.getId() && Objects.equals(getName(), people.getName()) && Objects.equals(getExpenses(), people.getExpenses());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getExpenses());
     }
 }

@@ -1,31 +1,21 @@
 package org.example;
 
-import org.example.Lumos.entity.Expense;
-import org.example.Lumos.entity.Income;
-import org.example.Lumos.entity.People;
-import org.example.Lumos.entity.ShowProgram;
-import org.example.Lumos.services.ExpenseService;
-import org.example.Lumos.services.IncomeService;
-import org.example.Lumos.services.PeopleService;
-import org.example.Lumos.services.ShowProgramService;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
+
         /*ShowProgramService showProgramService = new ShowProgramService();
         List<ShowProgram> showPrograms = showProgramService.findAllShowPrograms();
         for(ShowProgram showProgram:showPrograms){
             System.out.println(showProgram);
         }*/
         /*PeopleService peopleService = new PeopleService();
-        List<People> people = peopleService.findAllPeople();
-        for(People human:people){
+        List<People> peoples = peopleService.findAllPeople();
+        for(People human:peoples){
             System.out.println(human);
         }*/
+
+
+
         /*IncomeService incomeService = new IncomeService();
         List<Income> incomes = incomeService.findAllIncome();
         for(Income income:incomes){

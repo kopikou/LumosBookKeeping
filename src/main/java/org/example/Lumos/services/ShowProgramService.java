@@ -1,30 +1,17 @@
 package org.example.Lumos.services;
 
-import org.example.Lumos.dao.ShowProgramDaoImpl;
 import org.example.Lumos.entity.ShowProgram;
 
 import java.util.List;
 
-public class ShowProgramService {
-    private ShowProgramDaoImpl showProgramDao = new ShowProgramDaoImpl();
-    public ShowProgramService(){}
-    public ShowProgram findShowProgram(int id) {
-        return showProgramDao.findById(id);
-    }
+public interface ShowProgramService {
+    ShowProgram findShowProgram(int id);
 
-    public void saveShowProgram(ShowProgram showProgram) {
-        showProgramDao.save(showProgram);
-    }
+    void saveShowProgram(ShowProgram showProgram);
 
-    public void deleteShowProgram(ShowProgram showProgram) {
-        showProgramDao.delete(showProgram);
-    }
+    void deleteShowProgram(ShowProgram showProgram);
 
-    public void updateShowProgram(ShowProgram showProgram) {
-        showProgramDao.update(showProgram);
-    }
+    void updateShowProgram(ShowProgram showProgram);
 
-    public List<ShowProgram> findAllShowPrograms() {
-        return showProgramDao.findAll();
-    }
+    List<ShowProgram> findAllShowPrograms();
 }

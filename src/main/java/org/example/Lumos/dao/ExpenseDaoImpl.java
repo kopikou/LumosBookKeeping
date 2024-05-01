@@ -2,6 +2,7 @@ package org.example.Lumos.dao;
 
 import org.example.Lumos.entity.Expense;
 import org.example.Lumos.entity.Income;
+import org.example.Lumos.entity.People;
 import org.example.Lumos.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,7 +19,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
     public void save(Expense expense) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.save(expense);
+        session.persist(expense);
         tx1.commit();
         session.close();
     }
@@ -27,7 +28,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
     public void update(Expense expense) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(expense);
+        session.merge(expense);
         tx1.commit();
         session.close();
     }
@@ -36,7 +37,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
     public void delete(Expense expense) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.delete(expense);
+        Expense expense1 = (Expense) session.find(Expense.class, expense.getId());
+        session.remove(expense1);
         tx1.commit();
         session.close();
     }

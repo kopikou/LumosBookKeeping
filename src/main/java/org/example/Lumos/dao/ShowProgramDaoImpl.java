@@ -1,5 +1,6 @@
 package org.example.Lumos.dao;
 
+import org.example.Lumos.entity.People;
 import org.example.Lumos.utils.HibernateUtil;
 import org.example.Lumos.entity.ShowProgram;
 import org.hibernate.Session;
@@ -18,7 +19,7 @@ public class ShowProgramDaoImpl implements ShowProgramDao{
     public void save(ShowProgram showProgram) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.save(showProgram);
+        session.persist(showProgram);
         tx1.commit();
         session.close();
     }
@@ -27,7 +28,7 @@ public class ShowProgramDaoImpl implements ShowProgramDao{
     public void update(ShowProgram showProgram) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(showProgram);
+        session.merge(showProgram);
         tx1.commit();
         session.close();
     }
@@ -36,7 +37,8 @@ public class ShowProgramDaoImpl implements ShowProgramDao{
     public void delete(ShowProgram showProgram) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.delete(showProgram);
+        ShowProgram showProgram1 = (ShowProgram) session.find(ShowProgram.class, showProgram.getId());
+        session.remove(showProgram1);
         tx1.commit();
         session.close();
     }

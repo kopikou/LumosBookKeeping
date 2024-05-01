@@ -1,32 +1,17 @@
 package org.example.Lumos.services;
 
-import org.example.Lumos.dao.PeopleDaoImpl;
-import org.example.Lumos.dao.ShowProgramDaoImpl;
 import org.example.Lumos.entity.People;
-import org.example.Lumos.entity.ShowProgram;
 
 import java.util.List;
 
-public class PeopleService {
-    private PeopleDaoImpl peopleDao = new PeopleDaoImpl();
-    public PeopleService(){}
-    public People findPeople(int id) {
-        return peopleDao.findById(id);
-    }
+public interface PeopleService {
+    People findPeople(int id);
 
-    public void savePeople(People people) {
-        peopleDao.save(people);
-    }
+    void savePeople(People people);
 
-    public void deletePeople(People people) {
-        peopleDao.delete(people);
-    }
+    void deletePeople(People people);
 
-    public void updatePeople(People people) {
-        peopleDao.update(people);
-    }
+    void updatePeople(People people);
 
-    public List<People> findAllPeople() {
-        return peopleDao.findAll();
-    }
+    List<People> findAllPeople();
 }

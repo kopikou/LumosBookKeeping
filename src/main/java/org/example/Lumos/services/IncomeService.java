@@ -1,31 +1,17 @@
 package org.example.Lumos.services;
 
-import org.example.Lumos.dao.IncomeDaoImpl;
-import org.example.Lumos.dao.PeopleDaoImpl;
 import org.example.Lumos.entity.Income;
 
 import java.util.List;
 
-public class IncomeService {
-    private IncomeDaoImpl incomeDao = new IncomeDaoImpl();
-    public IncomeService(){}
-    public Income findIncome(int id) {
-        return incomeDao.findById(id);
-    }
+public interface IncomeService {
+    Income findIncome(int id);
 
-    public void saveIncome(Income income) {
-        incomeDao.save(income);
-    }
+    void saveIncome(Income income);
 
-    public void deleteIncome(Income income) {
-        incomeDao.delete(income);
-    }
+    void deleteIncome(Income income);
 
-    public void updateIncome(Income income) {
-        incomeDao.update(income);
-    }
+    void updateIncome(Income income);
 
-    public List<Income> findAllIncome() {
-        return incomeDao.findAll();
-    }
+    List<Income> findAllIncome();
 }

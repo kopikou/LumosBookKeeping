@@ -1,6 +1,7 @@
 package org.example.Lumos.dao;
 
 import org.example.Lumos.entity.Income;
+import org.example.Lumos.entity.People;
 import org.example.Lumos.entity.ShowProgram;
 import org.example.Lumos.utils.HibernateUtil;
 import org.hibernate.Session;
@@ -18,7 +19,7 @@ public class IncomeDaoImpl implements IncomeDao{
     public void save(Income income) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.save(income);
+        session.persist(income);
         tx1.commit();
         session.close();
     }
@@ -27,7 +28,7 @@ public class IncomeDaoImpl implements IncomeDao{
     public void update(Income income) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(income);
+        session.merge(income);
         tx1.commit();
         session.close();
     }
@@ -36,7 +37,8 @@ public class IncomeDaoImpl implements IncomeDao{
     public void delete(Income income) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.delete(income);
+        Income income1 = (Income) session.find(Income.class, income.getId());
+        session.remove(income1);
         tx1.commit();
         session.close();
     }

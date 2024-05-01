@@ -17,7 +17,8 @@ public class PeopleDaoImpl implements PeopleDao{
     public void save(People people) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.save(people);
+        //session.save(people);
+        session.persist(people);
         tx1.commit();
         session.close();
     }
@@ -26,7 +27,7 @@ public class PeopleDaoImpl implements PeopleDao{
     public void update(People people) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(people);
+        session.merge(people);
         tx1.commit();
         session.close();
     }
@@ -35,7 +36,10 @@ public class PeopleDaoImpl implements PeopleDao{
     public void delete(People people) {
         Session session = HibernateUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.delete(people);
+        //session.delete(findById(people.getId()));
+        //session.delete(people);
+        People person = (People) session.find(People.class, people.getId());
+        session.remove(person);
         tx1.commit();
         session.close();
     }
