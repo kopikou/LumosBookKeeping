@@ -1,8 +1,17 @@
 package org.example;
 
+import org.example.Lumos.gui.MainWindow.MainWindowController;
+import org.example.Lumos.gui.MainWindow.MainWindowView;
+import org.example.Lumos.services.ExpenseServiceImpl;
+import org.example.Lumos.services.IncomeServiceImpl;
+
 public class Main {
     public static void main(String[] args) {
-
+        IncomeServiceImpl incomeService = new IncomeServiceImpl();
+        ExpenseServiceImpl expenseService = new ExpenseServiceImpl();
+        //MainWindowView mainWindowView = new MainWindowView();
+        MainWindowController mainWindowController = new MainWindowController();
+        mainWindowController.execut(new MainWindowView(),incomeService,expenseService);
         /*ShowProgramService showProgramService = new ShowProgramService();
         List<ShowProgram> showPrograms = showProgramService.findAllShowPrograms();
         for(ShowProgram showProgram:showPrograms){
@@ -26,19 +35,6 @@ public class Main {
         for(Expense expense:expenses){
             System.out.println(expense);
         }*/
-
-
-
-
-        /*System.out.println("ДОХОДЫ");
-        System.out.println("01/01/2024");
-        System.out.println(showProgramService.findShowProgram(3).getPrice());
-        System.out.println(showProgramService.findShowProgram(3).getTitle());
-
-        System.out.println("РАСХОДЫ");
-        System.out.println("01/01/2024");
-        System.out.println(peopleService.findPeople(7).getName());
-        System.out.println(showProgramService.findShowProgram(3).getArtistSalary());*/
 
 
     }
