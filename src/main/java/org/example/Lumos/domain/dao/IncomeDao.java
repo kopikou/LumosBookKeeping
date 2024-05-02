@@ -1,6 +1,6 @@
-package org.example.Lumos.dao;
+package org.example.Lumos.domain.dao;
 
-import org.example.Lumos.entity.Income;
+import org.example.Lumos.domain.entity.Income;
 
 import java.util.List;
 

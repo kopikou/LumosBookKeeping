@@ -1,6 +1,6 @@
-package org.example.Lumos.services;
+package org.example.Lumos.domain.services;
 
-import org.example.Lumos.entity.Income;
+import org.example.Lumos.domain.entity.Income;
 
 import java.util.List;
 

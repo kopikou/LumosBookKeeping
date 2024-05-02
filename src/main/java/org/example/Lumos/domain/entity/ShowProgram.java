@@ -1,4 +1,4 @@
-package org.example.Lumos.entity;
+package org.example.Lumos.domain.entity;
 
 import jakarta.persistence.*;
 

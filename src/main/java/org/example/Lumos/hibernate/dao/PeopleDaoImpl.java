@@ -1,13 +1,14 @@
-package org.example.Lumos.dao;
+package org.example.Lumos.hibernate.dao;
 
-import org.example.Lumos.entity.People;
-import org.example.Lumos.utils.HibernateUtil;
+import org.example.Lumos.domain.dao.PeopleDao;
+import org.example.Lumos.domain.entity.People;
+import org.example.Lumos.hibernate.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class PeopleDaoImpl implements PeopleDao{
+public class PeopleDaoImpl implements PeopleDao {
     @Override
     public People findById(int id) {
         return HibernateUtil.getSession().get(People.class, id);

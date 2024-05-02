@@ -1,9 +1,9 @@
 package org.example.Lumos.gui.MainWindow;
 
-import org.example.Lumos.entity.Expense;
-import org.example.Lumos.entity.Income;
-import org.example.Lumos.services.ExpenseServiceImpl;
-import org.example.Lumos.services.IncomeServiceImpl;
+import org.example.Lumos.domain.entity.Expense;
+import org.example.Lumos.domain.entity.Income;
+import org.example.Lumos.hibernate.services.ExpenseServiceImpl;
+import org.example.Lumos.hibernate.services.IncomeServiceImpl;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;

@@ -1,14 +1,14 @@
-package org.example.Lumos.dao;
+package org.example.Lumos.hibernate.dao;
 
-import org.example.Lumos.entity.People;
-import org.example.Lumos.utils.HibernateUtil;
-import org.example.Lumos.entity.ShowProgram;
+import org.example.Lumos.domain.dao.ShowProgramDao;
+import org.example.Lumos.hibernate.utils.HibernateUtil;
+import org.example.Lumos.domain.entity.ShowProgram;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class ShowProgramDaoImpl implements ShowProgramDao{
+public class ShowProgramDaoImpl implements ShowProgramDao {
 
     @Override
     public ShowProgram findById(int id) {

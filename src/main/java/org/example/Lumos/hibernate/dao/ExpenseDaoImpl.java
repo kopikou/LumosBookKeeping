@@ -1,15 +1,14 @@
-package org.example.Lumos.dao;
+package org.example.Lumos.hibernate.dao;
 
-import org.example.Lumos.entity.Expense;
-import org.example.Lumos.entity.Income;
-import org.example.Lumos.entity.People;
-import org.example.Lumos.utils.HibernateUtil;
+import org.example.Lumos.domain.dao.ExpenseDao;
+import org.example.Lumos.domain.entity.Expense;
+import org.example.Lumos.hibernate.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class ExpenseDaoImpl implements ExpenseDao{
+public class ExpenseDaoImpl implements ExpenseDao {
     @Override
     public Expense findById(int id) {
         return HibernateUtil.getSession().get(Expense.class, id);

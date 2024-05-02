@@ -1,11 +1,12 @@
-package org.example.Lumos.services;
+package org.example.Lumos.hibernate.services;
 
-import org.example.Lumos.dao.ExpenseDaoImpl;
-import org.example.Lumos.entity.Expense;
+import org.example.Lumos.domain.services.ExpenseService;
+import org.example.Lumos.hibernate.dao.ExpenseDaoImpl;
+import org.example.Lumos.domain.entity.Expense;
 
 import java.util.List;
 
-public class ExpenseServiceImpl implements ExpenseService{
+public class ExpenseServiceImpl implements ExpenseService {
     private ExpenseDaoImpl expenseDao = new ExpenseDaoImpl();
     public ExpenseServiceImpl(){}
     @Override

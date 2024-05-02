@@ -1,11 +1,12 @@
-package org.example.Lumos.services;
+package org.example.Lumos.hibernate.services;
 
-import org.example.Lumos.dao.ShowProgramDaoImpl;
-import org.example.Lumos.entity.ShowProgram;
+import org.example.Lumos.domain.services.ShowProgramService;
+import org.example.Lumos.hibernate.dao.ShowProgramDaoImpl;
+import org.example.Lumos.domain.entity.ShowProgram;
 
 import java.util.List;
 
-public class ShowProgramServiceImpl implements ShowProgramService{
+public class ShowProgramServiceImpl implements ShowProgramService {
     private ShowProgramDaoImpl showProgramDao = new ShowProgramDaoImpl();
     public ShowProgramServiceImpl(){}
     @Override
