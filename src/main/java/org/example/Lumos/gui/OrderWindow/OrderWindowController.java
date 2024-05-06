@@ -13,6 +13,7 @@ import java.util.List;
 
 public class OrderWindowController {
     private List<JComboBox> artistsComboBoxes;
+    private List<JComboBox> techniciansComboBoxes;
     private ShowProgramServiceImpl showProgramService = new ShowProgramServiceImpl();
     public void execut(OrderWindowView orderWindowView){
         JFrame parentFrame = orderWindowView.getParentFrame();
@@ -30,6 +31,7 @@ public class OrderWindowController {
             showProgramComboBox.addItem(showPrograms.get(i).getTitle());
 
         artistsComboBoxes = orderWindowView.getArtistsComboBoxes();
+        techniciansComboBoxes = orderWindowView.getTechniciansComboBoxes();
 
         showProgramComboBox.addActionListener(new SelectedShowProgramActionListener(showPrograms,showProgramComboBox));
 
@@ -63,7 +65,19 @@ public class OrderWindowController {
                 }
             }
 
+            int techniciansCnt = showPrograms.get(id).getTechniciansCnt();
 
+            for (int i = 0; i < techniciansComboBoxes.size(); i++){
+                techniciansComboBoxes.get(i).removeAllItems();
+                techniciansComboBoxes.get(i).setEnabled(false);
+            }
+
+            for (int i = 0; i < showPrograms.get(id).getTechnicians().size(); i++){
+                for (int j = 0; j < techniciansCnt; j++){
+                    techniciansComboBoxes.get(j).addItem(showPrograms.get(id).getTechnicians().get(i).getName());
+                    techniciansComboBoxes.get(j).setEnabled(true);
+                }
+            }
         }
     }
 }

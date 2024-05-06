@@ -12,11 +12,18 @@ public class OrderWindowView extends JFrame {
     private JFrame parent;
     private JPanel mainPanel;
     private JPanel artistsPanel;
+    private JPanel showPanel;
+    private JPanel datePanel;
+    private JPanel placePanel;
+    private JPanel techniciansPanel;
+    private JPanel transferPanel;
     private JComboBox showProgramComboBox;
     private JComboBox artistsComboBox1, artistsComboBox2, artistsComboBox3, artistsComboBox4, artistsComboBox5, artistsComboBox6, artistsComboBox7, artistsComboBox8;
     private List<JComboBox> artistsComboBoxes;
     private JComboBox techniciansComboBox1, techniciansComboBox2;
+    private List<JComboBox> techniciansComboBoxes;
     private JComboBox transferComboBox1,transferComboBox2;
+    private List<JComboBox> transferComboBoxes;
     private JLabel showProgramLabel;
     private JLabel dateLabel;
     private JLabel placeLabel;
@@ -42,7 +49,12 @@ public class OrderWindowView extends JFrame {
 
     private void initComponents(){
         mainPanel = new JPanel();
+        showPanel = new JPanel();
+        datePanel = new JPanel();
+        placePanel = new JPanel();
         artistsPanel = new JPanel();
+        techniciansPanel = new JPanel();
+        transferPanel = new JPanel();
 
         showProgramLabel = new JLabel("Шоу-программа");
         showProgramComboBox = new JComboBox<>();
@@ -74,19 +86,40 @@ public class OrderWindowView extends JFrame {
         artistsComboBoxes.add(artistsComboBox6);
         artistsComboBoxes.add(artistsComboBox7);
         artistsComboBoxes.add(artistsComboBox8);
+
+        techniciansComboBox1 = new JComboBox<>();
+        techniciansComboBox2 = new JComboBox<>();
+
+        techniciansLabel = new JLabel("Техники");
+        techniciansComboBoxes = new ArrayList<>();
+        techniciansComboBoxes.add(techniciansComboBox1);
+        techniciansComboBoxes.add(techniciansComboBox2);
+
+        transferComboBox1 = new JComboBox<>();
+        transferComboBox2 = new JComboBox<>();
+
+        transferLabel = new JLabel("Трансфер");
+        transferComboBoxes = new ArrayList<>();
+        transferComboBoxes.add(transferComboBox1);
+        transferComboBoxes.add(transferComboBox2);
     }
     private void placeComponents(){
         //mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.X_AXIS));
+        showPanel.setLayout(new BoxLayout(showPanel,BoxLayout.Y_AXIS));
+        datePanel.setLayout(new BoxLayout(datePanel,BoxLayout.Y_AXIS));
+        placePanel.setLayout(new BoxLayout(placePanel,BoxLayout.Y_AXIS));
         artistsPanel.setLayout(new BoxLayout(artistsPanel,BoxLayout.Y_AXIS));
+        techniciansPanel.setLayout(new BoxLayout(techniciansPanel,BoxLayout.Y_AXIS));
+        transferPanel.setLayout(new BoxLayout(transferPanel,BoxLayout.Y_AXIS));
 
-        mainPanel.add(showProgramLabel);
-        mainPanel.add(showProgramComboBox);
+        showPanel.add(showProgramLabel);
+        showPanel.add(showProgramComboBox);
 
-        mainPanel.add(dateLabel);
-        mainPanel.add(picker);
+        datePanel.add(dateLabel);
+        datePanel.add(picker);
 
-        mainPanel.add(placeLabel);
-        mainPanel.add(placeTextField);
+        placePanel.add(placeLabel);
+        placePanel.add(placeTextField);
 
         artistsPanel.add(artitsLabel);
         artistsPanel.add(artistsComboBox1);
@@ -98,7 +131,20 @@ public class OrderWindowView extends JFrame {
         artistsPanel.add(artistsComboBox7);
         artistsPanel.add(artistsComboBox8);
 
+        techniciansPanel.add(techniciansLabel);
+        techniciansPanel.add(techniciansComboBox1);
+        techniciansPanel.add(techniciansComboBox2);
+
+        transferPanel.add(transferLabel);
+        transferPanel.add(transferComboBox1);
+        transferPanel.add(transferComboBox2);
+
+        mainPanel.add(showPanel);
+        mainPanel.add(datePanel);
+        mainPanel.add(placePanel);
         mainPanel.add(artistsPanel);
+        mainPanel.add(techniciansPanel);
+        mainPanel.add(transferPanel);
 
         this.add(mainPanel);
     }
@@ -109,5 +155,8 @@ public class OrderWindowView extends JFrame {
     public JComboBox getShowProgramComboBox(){return showProgramComboBox;}
     public List<JComboBox> getArtistsComboBoxes(){
         return artistsComboBoxes;
+    }
+    public List<JComboBox> getTechniciansComboBoxes(){
+        return techniciansComboBoxes;
     }
 }
