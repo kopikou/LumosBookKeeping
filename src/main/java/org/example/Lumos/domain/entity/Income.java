@@ -21,11 +21,11 @@ public class Income {
     private List<Expense> expenses;
 
     public Income(){}
-    public Income(String date, String place, ShowProgram showProgram, List<Expense> expenses) {
+    public Income(String date, String place, ShowProgram showProgram) {//, List<Expense> expenses) {
         this.date = date;
         this.place = place;
         this.showProgram = showProgram;
-        this.expenses = expenses;
+        //this.expenses = expenses;
     }
 
     public int getId() {

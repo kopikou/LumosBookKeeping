@@ -1,5 +1,6 @@
 package org.example.Lumos.gui.OrderWindow;
 
+import org.example.Lumos.gui.MainWindow.MainWindowView;
 import org.jdesktop.swingx.JXDatePicker;
 
 import javax.swing.*;
@@ -32,8 +33,10 @@ public class OrderWindowView extends JFrame {
     private JLabel transferLabel;
     private JXDatePicker picker;
     private JTextField placeTextField;
+    private JButton addButton;
     public OrderWindowView(JFrame parent){
         super("Добавить заказ");
+        setIconImage(new ImageIcon(OrderWindowView.class.getResource("logo.png").getPath()).getImage());
 
         this.parent = parent;
 
@@ -41,7 +44,7 @@ public class OrderWindowView extends JFrame {
         placeComponents();
 
         pack();
-        setSize(1000,700);
+        setSize(1000,300);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -62,7 +65,7 @@ public class OrderWindowView extends JFrame {
         dateLabel = new JLabel("Дата");
         picker = new JXDatePicker();
         picker.setDate(Calendar.getInstance().getTime());
-        picker.setFormats(new SimpleDateFormat("dd.MM.yyyy"));
+        picker.setFormats(new SimpleDateFormat("yyyy-MM-dd"));
 
         placeLabel = new JLabel("Место");
         placeTextField = new JTextField(25);
@@ -102,6 +105,8 @@ public class OrderWindowView extends JFrame {
         transferComboBoxes = new ArrayList<>();
         transferComboBoxes.add(transferComboBox1);
         transferComboBoxes.add(transferComboBox2);
+
+        addButton = new JButton("Добавить");
     }
     private void placeComponents(){
         //mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.X_AXIS));
@@ -145,6 +150,7 @@ public class OrderWindowView extends JFrame {
         mainPanel.add(artistsPanel);
         mainPanel.add(techniciansPanel);
         mainPanel.add(transferPanel);
+        mainPanel.add(addButton);
 
         this.add(mainPanel);
     }
@@ -159,4 +165,10 @@ public class OrderWindowView extends JFrame {
     public List<JComboBox> getTechniciansComboBoxes(){
         return techniciansComboBoxes;
     }
+    public List<JComboBox> getTransferComboBoxes(){
+        return transferComboBoxes;
+    }
+    public JButton getAddButton(){ return  addButton; }
+    public JTextField getPlaceTextField(){return placeTextField;}
+    public JXDatePicker getPicker(){return picker;}
 }

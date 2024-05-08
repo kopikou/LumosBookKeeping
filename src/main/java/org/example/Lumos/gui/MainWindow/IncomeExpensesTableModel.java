@@ -6,7 +6,11 @@ import org.example.Lumos.hibernate.services.ExpenseServiceImpl;
 import org.example.Lumos.hibernate.services.IncomeServiceImpl;
 
 import javax.swing.table.AbstractTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class IncomeExpensesTableModel extends AbstractTableModel {
     private List<Income> incomes;
@@ -42,22 +46,22 @@ public class IncomeExpensesTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex){
             case 0: {
-                if(rowIndex == 0 || rowIndex == expenses.get(rowIndex).getIncome().getExpenses().size())
+                if(rowIndex == 0 || expenses.get(rowIndex).getIncome() != expenses.get(rowIndex-1).getIncome())//rowIndex == expenses.get(rowIndex).getIncome().getExpenses().size())
                     return expenses.get(rowIndex).getIncome().getDate();
                 else return null;
             }
             case 1: {
-                if(rowIndex == 0 || rowIndex == expenses.get(rowIndex).getIncome().getExpenses().size())
+                if(rowIndex == 0 || expenses.get(rowIndex).getIncome() != expenses.get(rowIndex-1).getIncome())
                     return expenses.get(rowIndex).getIncome().getShowProgram().getPrice();
                 else return null;
             }
             case 2: {
-                if(rowIndex == 0 || rowIndex == expenses.get(rowIndex).getIncome().getExpenses().size())
+                if(rowIndex == 0 || expenses.get(rowIndex).getIncome() != expenses.get(rowIndex-1).getIncome())//rowIndex == expenses.get(rowIndex).getIncome().getExpenses().size())
                     return expenses.get(rowIndex).getIncome().getShowProgram().getTitle();
                 else return null;
             }
             case 3: {
-                if(rowIndex == 0 || rowIndex == expenses.get(rowIndex).getIncome().getExpenses().size())
+                if(rowIndex == 0 || expenses.get(rowIndex).getIncome() != expenses.get(rowIndex-1).getIncome())//rowIndex == expenses.get(rowIndex).getIncome().getExpenses().size())
                     return expenses.get(rowIndex).getIncome().getPlace();
                 else return null;
             }

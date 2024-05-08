@@ -17,6 +17,8 @@ public class MainWindowController {
         JButton addOrderButton = mainWindowView.getAddOrderButton();
         AddOrderActionListener addOrderActionListener = new AddOrderActionListener(mainWindowView);
         addOrderButton.addActionListener(addOrderActionListener);
+
+
     }
 
     private class AddOrderActionListener implements ActionListener{
@@ -31,4 +33,6 @@ public class MainWindowController {
             mainWindowView.dispose();
         }
     }
+
+
 }

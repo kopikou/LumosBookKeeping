@@ -10,6 +10,7 @@ public class MainWindowView extends JFrame {
     private JPanel buttonPanel;
     public MainWindowView(){
         super("Lumos Бухгалтерия");
+        setIconImage(new ImageIcon(MainWindowView.class.getResource("logo.png").getPath()).getImage());
 
         initComponents();
         placeComponents();
