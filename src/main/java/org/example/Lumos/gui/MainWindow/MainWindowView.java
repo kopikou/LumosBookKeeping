@@ -1,16 +1,17 @@
 package org.example.Lumos.gui.MainWindow;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainWindowView extends JFrame {
     private JPanel mainPanel;
     private JTable incomeExpensesTable;
     private JScrollPane jcrollPane;
-    private JButton addOrderButton;
+    private JButton addOrderButton, delOrderButton, seeShowProgramButton;
     private JPanel buttonPanel;
     public MainWindowView(){
         super("Lumos Бухгалтерия");
-        setIconImage(new ImageIcon(MainWindowView.class.getResource("logo.png").getPath()).getImage());
+        setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
 
         initComponents();
         placeComponents();
@@ -29,6 +30,10 @@ public class MainWindowView extends JFrame {
         incomeExpensesTable = new JTable();
 
         addOrderButton = new JButton("Добавить заказ");
+
+        delOrderButton = new JButton("Удалить заказ");
+
+        seeShowProgramButton = new JButton("Шоу-программы");
     }
     private void placeComponents(){
         jcrollPane = new JScrollPane(incomeExpensesTable);
@@ -38,9 +43,10 @@ public class MainWindowView extends JFrame {
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
         buttonPanel.add(addOrderButton);
+        buttonPanel.add(delOrderButton);
+        buttonPanel.add(seeShowProgramButton);
 
         mainPanel.add(buttonPanel);
-        //mainPanel.add(addOrderButton);
 
         this.add(mainPanel);
     }
@@ -51,4 +57,6 @@ public class MainWindowView extends JFrame {
     public JButton getAddOrderButton(){
         return addOrderButton;
     }
+    public JButton getDelOrderButton(){return delOrderButton;}
+    public JButton getSeeShowProgramButton(){return seeShowProgramButton;}
 }

@@ -15,7 +15,11 @@ import java.util.Locale;
 public class IncomeExpensesTableModel extends AbstractTableModel {
     private List<Income> incomes;
     private List<Expense> expenses;
+    private IncomeServiceImpl incomeService;
+    private ExpenseServiceImpl expenseService;
     public IncomeExpensesTableModel(IncomeServiceImpl incomeService, ExpenseServiceImpl expenseService){
+        this.incomeService = incomeService;
+        this.expenseService = expenseService;
         incomes = incomeService.findAllIncome();
         expenses = expenseService.findAllExpense();
     }
@@ -69,5 +73,21 @@ public class IncomeExpensesTableModel extends AbstractTableModel {
             case 5: return expenses.get(rowIndex).getSalary();
         }
         return null;
+    }
+
+    public void delete(int index){
+        /*try{
+            this.government.remove(index);
+        }catch(MultiplePrisedentEcxeption ex) {
+            clearTable();
+        }*/
+        Income income = incomeService.findIncome(expenses.get(index).getIncome().getId());
+        for (int i = 0; i < expenses.size(); i++){
+            if (expenses.get(i).getIncome() == income){
+                expenseService.deleteExpense(expenses.get(i));
+            }
+        }
+        incomeService.deleteIncome(income);
+        fireTableDataChanged();
     }
 }

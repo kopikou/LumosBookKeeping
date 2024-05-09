@@ -4,6 +4,7 @@ import org.example.Lumos.gui.MainWindow.MainWindowView;
 import org.jdesktop.swingx.JXDatePicker;
 
 import javax.swing.*;
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,13 +12,7 @@ import java.util.List;
 
 public class OrderWindowView extends JFrame {
     private JFrame parent;
-    private JPanel mainPanel;
-    private JPanel artistsPanel;
-    private JPanel showPanel;
-    private JPanel datePanel;
-    private JPanel placePanel;
-    private JPanel techniciansPanel;
-    private JPanel transferPanel;
+    private JPanel mainPanel,artistsPanel,showPanel,datePanel,placePanel,techniciansPanel,transferPanel;
     private JComboBox showProgramComboBox;
     private JComboBox artistsComboBox1, artistsComboBox2, artistsComboBox3, artistsComboBox4, artistsComboBox5, artistsComboBox6, artistsComboBox7, artistsComboBox8;
     private List<JComboBox> artistsComboBoxes;
@@ -25,18 +20,13 @@ public class OrderWindowView extends JFrame {
     private List<JComboBox> techniciansComboBoxes;
     private JComboBox transferComboBox1,transferComboBox2;
     private List<JComboBox> transferComboBoxes;
-    private JLabel showProgramLabel;
-    private JLabel dateLabel;
-    private JLabel placeLabel;
-    private JLabel artitsLabel;
-    private JLabel techniciansLabel;
-    private JLabel transferLabel;
+    private JLabel showProgramLabel,dateLabel,placeLabel,artitsLabel,techniciansLabel,transferLabel;
     private JXDatePicker picker;
     private JTextField placeTextField;
     private JButton addButton;
     public OrderWindowView(JFrame parent){
         super("Добавить заказ");
-        setIconImage(new ImageIcon(OrderWindowView.class.getResource("logo.png").getPath()).getImage());
+        setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
 
         this.parent = parent;
 
