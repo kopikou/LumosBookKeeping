@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.Lumos.gui.MainWindow.MainWindowController;
-import org.example.Lumos.gui.MainWindow.MainWindowView;
+import org.example.Lumos.gui.mainWindow.MainWindowController;
+import org.example.Lumos.gui.mainWindow.MainWindowView;
 import org.example.Lumos.hibernate.services.ExpenseServiceImpl;
 import org.example.Lumos.hibernate.services.IncomeServiceImpl;
 

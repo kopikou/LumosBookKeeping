@@ -1,16 +1,14 @@
-package org.example.Lumos.gui.ShowProgramWindow;
+package org.example.Lumos.gui.showProgramWindow;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ShowProgramWindowView extends JFrame {
     private JFrame parent;
-    private JPanel mainPanel,tablePanel,buttonPanel;
-    private JComboBox showProgramComboBox;
+    private JPanel mainPanel,buttonPanel;
     private JTable showProgramTable;
-    private JLabel showProgramLabel;
     private JScrollPane jcrollPane;
-    private JButton seeArtistsButton,seeTechniciansButton;
+    private JButton seeArtistsButton,seeTechniciansButton,seeTransferButton;
     public ShowProgramWindowView(JFrame parent){
         super("Шоу программы");
         setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
@@ -29,36 +27,26 @@ public class ShowProgramWindowView extends JFrame {
 
     private void initComponents(){
         mainPanel = new JPanel();
-        tablePanel = new JPanel();
         buttonPanel = new JPanel();
-
-        showProgramLabel = new JLabel("Шоу-программа");
-        showProgramComboBox = new JComboBox<>();
-        //showProgramComboBox.setPreferredSize(new Dimension(100, 50));
 
         showProgramTable = new JTable();
 
         seeArtistsButton = new JButton("Посмотреть артистов");
         seeTechniciansButton = new JButton("Посмотреть техников");
+        seeTransferButton = new JButton("Посмотреть трансфер");
     }
 
     private void placeComponents(){
-        jcrollPane = new JScrollPane(showProgramTable);
-
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.X_AXIS));
 
-        tablePanel.setLayout(new BoxLayout(tablePanel,BoxLayout.Y_AXIS));
-        //tablePanel.add(showProgramLabel);
-        //tablePanel.add(showProgramComboBox);
-        tablePanel.add(jcrollPane);
+        jcrollPane = new JScrollPane(showProgramTable);
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
-        buttonPanel.add(showProgramLabel);
-        buttonPanel.add(showProgramComboBox);
         buttonPanel.add(seeArtistsButton);
         buttonPanel.add(seeTechniciansButton);
+        buttonPanel.add(seeTransferButton);
 
-        mainPanel.add(tablePanel);
+        mainPanel.add(jcrollPane);
         mainPanel.add(buttonPanel);
 
         this.add(mainPanel);
@@ -66,6 +54,14 @@ public class ShowProgramWindowView extends JFrame {
     public JFrame getParentFrame(){
         return this.parent;
     }
-    public JComboBox getShowProgramComboBox(){return showProgramComboBox;}
     public JTable getShowProgramTable(){return showProgramTable;}
+    public JButton getSeeArtistsButton() {
+        return seeArtistsButton;
+    }
+    public JButton getSeeTechniciansButton() {
+        return seeTechniciansButton;
+    }
+    public JButton getSeeTransferButton() {
+        return seeTransferButton;
+    }
 }

@@ -1,4 +1,4 @@
-package org.example.Lumos.gui.MainWindow;
+package org.example.Lumos.gui.mainWindow;
 
 import javax.swing.*;
 import java.awt.*;

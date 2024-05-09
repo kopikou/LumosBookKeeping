@@ -1,6 +1,5 @@
-package org.example.Lumos.gui.OrderWindow;
+package org.example.Lumos.gui.orderWindow;
 
-import org.example.Lumos.gui.MainWindow.MainWindowView;
 import org.jdesktop.swingx.JXDatePicker;
 
 import javax.swing.*;

@@ -1,9 +1,12 @@
-package org.example.Lumos.gui.MainWindow;
+package org.example.Lumos.gui.mainWindow;
 
-import org.example.Lumos.gui.OrderWindow.OrderWindowController;
-import org.example.Lumos.gui.OrderWindow.OrderWindowView;
-import org.example.Lumos.gui.ShowProgramWindow.ShowProgramWindowController;
-import org.example.Lumos.gui.ShowProgramWindow.ShowProgramWindowView;
+import org.example.Lumos.domain.entity.ShowProgram;
+import org.example.Lumos.gui.orderWindow.OrderWindowController;
+import org.example.Lumos.gui.orderWindow.OrderWindowView;
+import org.example.Lumos.gui.peopleWindow.PeopleWindowController;
+import org.example.Lumos.gui.peopleWindow.PeopleWindowView;
+import org.example.Lumos.gui.showProgramWindow.ShowProgramWindowController;
+import org.example.Lumos.gui.showProgramWindow.ShowProgramWindowView;
 import org.example.Lumos.hibernate.services.ExpenseServiceImpl;
 import org.example.Lumos.hibernate.services.IncomeServiceImpl;
 
@@ -34,7 +37,7 @@ public class MainWindowController {
         DelOrderActionListener delOrderActionListener = new DelOrderActionListener();
         delOrderButton.addActionListener(delOrderActionListener);
 
-        JButton seeShowProgramButton =mainWindowView.getSeeShowProgramButton();
+        JButton seeShowProgramButton = mainWindowView.getSeeShowProgramButton();
         SeeShowProgramActionListener seeShowProgramActionListener = new SeeShowProgramActionListener(mainWindowView);
         seeShowProgramButton.addActionListener(seeShowProgramActionListener);
     }
@@ -59,8 +62,7 @@ public class MainWindowController {
                 incomeExpensesTableModel.delete(incomeExpensesTable.getSelectedRow());
                 mainWindowView.dispose();
                 execut(new MainWindowView(),incomeService,expenseService);
-
-            }catch (ArrayIndexOutOfBoundsException ex){
+            }catch (IndexOutOfBoundsException ex){
             }
         }
     }

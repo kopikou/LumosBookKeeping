@@ -1,4 +1,4 @@
-package org.example.Lumos.gui.MainWindow;
+package org.example.Lumos.gui.mainWindow;
 
 import org.example.Lumos.domain.entity.Expense;
 import org.example.Lumos.domain.entity.Income;
@@ -6,11 +6,7 @@ import org.example.Lumos.hibernate.services.ExpenseServiceImpl;
 import org.example.Lumos.hibernate.services.IncomeServiceImpl;
 
 import javax.swing.table.AbstractTableModel;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class IncomeExpensesTableModel extends AbstractTableModel {
     private List<Income> incomes;
