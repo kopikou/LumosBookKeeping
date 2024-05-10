@@ -72,11 +72,6 @@ public class IncomeExpensesTableModel extends AbstractTableModel {
     }
 
     public void delete(int index){
-        /*try{
-            this.government.remove(index);
-        }catch(MultiplePrisedentEcxeption ex) {
-            clearTable();
-        }*/
         Income income = incomeService.findIncome(expenses.get(index).getIncome().getId());
         for (int i = 0; i < expenses.size(); i++){
             if (expenses.get(i).getIncome() == income){

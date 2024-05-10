@@ -219,11 +219,14 @@ public class OrderWindowController {
                     expenses.add(expense);
                     expenseService.saveExpense(expense);
                 }
+                MainWindowController mainWindowController = new MainWindowController();
+                mainWindowController.execut(new MainWindowView(),incomeService,expenseService);
+                orderFrame.dispose();
+            }else{
+                JOptionPane.showMessageDialog(orderFrame,
+                        "Ошибка записи. Пожалуйста, заполните все поля.",
+                        "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
-
-            MainWindowController mainWindowController = new MainWindowController();
-            mainWindowController.execut(new MainWindowView(),incomeService,expenseService);
-            orderFrame.dispose();
         }
     }
 }

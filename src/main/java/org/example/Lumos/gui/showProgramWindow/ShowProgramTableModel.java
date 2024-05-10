@@ -1,5 +1,6 @@
 package org.example.Lumos.gui.showProgramWindow;
 
+import org.example.Lumos.domain.entity.Income;
 import org.example.Lumos.domain.entity.ShowProgram;
 import org.example.Lumos.hibernate.services.ShowProgramServiceImpl;
 
@@ -51,5 +52,11 @@ public class ShowProgramTableModel extends AbstractTableModel {
             case 7: return showPrograms.get(rowIndex).getTransferCost();
         }
         return null;
+    }
+
+    public void delete(int index){
+        ShowProgram showProgram = showProgramService.findShowProgram(showPrograms.get(index).getId());
+        showProgramService.deleteShowProgram(showProgram);
+        fireTableDataChanged();
     }
 }

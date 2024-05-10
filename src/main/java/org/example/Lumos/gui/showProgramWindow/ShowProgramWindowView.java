@@ -8,9 +8,9 @@ public class ShowProgramWindowView extends JFrame {
     private JPanel mainPanel,buttonPanel;
     private JTable showProgramTable;
     private JScrollPane jcrollPane;
-    private JButton seeArtistsButton,seeTechniciansButton,seeTransferButton;
+    private JButton seeArtistsButton,seeTechniciansButton,seeTransferButton,addShowProgramButton,delShowProgramButton;
     public ShowProgramWindowView(JFrame parent){
-        super("Шоу программы");
+        super("Шоу-программы");
         setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
 
         this.parent = parent;
@@ -19,7 +19,7 @@ public class ShowProgramWindowView extends JFrame {
         placeComponents();
 
         pack();
-        setSize(1000,700);
+        setSize(1300,700);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -34,6 +34,8 @@ public class ShowProgramWindowView extends JFrame {
         seeArtistsButton = new JButton("Посмотреть артистов");
         seeTechniciansButton = new JButton("Посмотреть техников");
         seeTransferButton = new JButton("Посмотреть трансфер");
+        addShowProgramButton = new JButton("Добавить шоу-программу");
+        delShowProgramButton = new JButton("Удалить шоу-программу");
     }
 
     private void placeComponents(){
@@ -42,6 +44,8 @@ public class ShowProgramWindowView extends JFrame {
         jcrollPane = new JScrollPane(showProgramTable);
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
+        buttonPanel.add(addShowProgramButton);
+        buttonPanel.add(delShowProgramButton);
         buttonPanel.add(seeArtistsButton);
         buttonPanel.add(seeTechniciansButton);
         buttonPanel.add(seeTransferButton);
@@ -64,4 +68,6 @@ public class ShowProgramWindowView extends JFrame {
     public JButton getSeeTransferButton() {
         return seeTransferButton;
     }
+    public JButton getAddShowProgramButton() {return addShowProgramButton;}
+    public JButton getDelShowProgramButton(){return delShowProgramButton;}
 }
