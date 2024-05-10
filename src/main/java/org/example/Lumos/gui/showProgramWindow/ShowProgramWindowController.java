@@ -1,11 +1,8 @@
 package org.example.Lumos.gui.showProgramWindow;
 
 import org.example.Lumos.domain.entity.ShowProgram;
-import org.example.Lumos.gui.mainWindow.MainWindowView;
 import org.example.Lumos.gui.newShowProgramWindow.NewShowProgramWindowController;
 import org.example.Lumos.gui.newShowProgramWindow.NewShowProgramWindowView;
-import org.example.Lumos.gui.orderWindow.OrderWindowController;
-import org.example.Lumos.gui.orderWindow.OrderWindowView;
 import org.example.Lumos.gui.peopleWindow.PeopleWindowController;
 import org.example.Lumos.gui.peopleWindow.PeopleWindowView;
 import org.example.Lumos.hibernate.services.ShowProgramServiceImpl;

@@ -1,6 +1,5 @@
 package org.example.Lumos.gui.showProgramWindow;
 
-import org.example.Lumos.domain.entity.Income;
 import org.example.Lumos.domain.entity.ShowProgram;
 import org.example.Lumos.hibernate.services.ShowProgramServiceImpl;
 

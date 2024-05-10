@@ -7,7 +7,7 @@ import org.example.Lumos.domain.entity.People;
 import java.util.List;
 
 public class PeopleServiceImpl implements PeopleService {
-    private PeopleDaoImpl peopleDao;
+    private PeopleDaoImpl peopleDao = new PeopleDaoImpl();
     public PeopleServiceImpl(){}
     @Override
     public People findPeople(int id) {

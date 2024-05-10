@@ -1,26 +1,31 @@
 package org.example.Lumos.gui.peopleWindow;
 
-import org.example.Lumos.hibernate.services.PeopleServiceImpl;
+import org.jdesktop.swingx.VerticalLayout;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PeopleWindowView extends JFrame {
     private JFrame parent;
-    private JPanel mainPanel;
+    private JPanel mainPanel,buttonPanel;
     private JScrollPane jcrollPane;
     private JList<String> people;
+    private JButton addPersonButton,delPersonButton;
+    private JTextField nameTextField;
+    private JComboBox personComboBox;
+    private String title;
     public PeopleWindowView(JFrame parent,String title){
         super(title);
         setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
 
         this.parent = parent;
+        this.title = title;
 
         initComponents();
         placeComponents();
 
         pack();
-        setSize(300,300);
+        setSize(400,400);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -28,16 +33,38 @@ public class PeopleWindowView extends JFrame {
 
     private void initComponents(){
         mainPanel = new JPanel();
+        buttonPanel = new JPanel();
 
         people = new JList<>();
+
+        addPersonButton = new JButton("Добавить");
+        delPersonButton = new JButton("Удалить");
+
+        nameTextField = new JTextField(20);
+        personComboBox = new JComboBox<>();
     }
 
     private void placeComponents(){
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.X_AXIS));
+        buttonPanel.setLayout(new VerticalLayout());
 
         jcrollPane = new JScrollPane(people);
 
-        this.add(jcrollPane);
+        mainPanel.add(jcrollPane);
+
+        nameTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(nameTextField);
+        personComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(personComboBox);
+
+        addPersonButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(addPersonButton);
+        delPersonButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(delPersonButton);
+
+        mainPanel.add(buttonPanel);
+
+        this.add(mainPanel);
     }
     public JFrame getParentFrame(){
         return this.parent;
@@ -46,4 +73,19 @@ public class PeopleWindowView extends JFrame {
     public JList<String> getPeopleList() {
         return people;
     }
+    public JButton getAddPersonButton(){return addPersonButton;}
+
+    public JButton getDelPersonButton() {
+        return delPersonButton;
+    }
+
+    public JComboBox getPersonComboBox() {
+        return personComboBox;
+    }
+
+    public JTextField getNameTextField() {
+        return nameTextField;
+    }
+
+    public String getTitle(){return title;}
 }

@@ -1,6 +1,6 @@
 package org.example.Lumos.gui.mainWindow;
 
-import org.example.Lumos.domain.entity.ShowProgram;
+import org.example.Lumos.domain.entity.People;
 import org.example.Lumos.gui.orderWindow.OrderWindowController;
 import org.example.Lumos.gui.orderWindow.OrderWindowView;
 import org.example.Lumos.gui.peopleWindow.PeopleWindowController;
@@ -9,10 +9,12 @@ import org.example.Lumos.gui.showProgramWindow.ShowProgramWindowController;
 import org.example.Lumos.gui.showProgramWindow.ShowProgramWindowView;
 import org.example.Lumos.hibernate.services.ExpenseServiceImpl;
 import org.example.Lumos.hibernate.services.IncomeServiceImpl;
+import org.example.Lumos.hibernate.services.PeopleServiceImpl;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class MainWindowController {
     private IncomeExpensesTableModel incomeExpensesTableModel;
@@ -20,6 +22,7 @@ public class MainWindowController {
     private IncomeServiceImpl incomeService;
     private ExpenseServiceImpl expenseService;
     private MainWindowView mainWindowView;
+    private PeopleServiceImpl peopleService;
     public void execut(MainWindowView mainWindowView,IncomeServiceImpl incomeService, ExpenseServiceImpl expenseService){
         this.incomeService = incomeService;
         this.expenseService = expenseService;
@@ -40,6 +43,11 @@ public class MainWindowController {
         JButton seeShowProgramButton = mainWindowView.getSeeShowProgramButton();
         SeeShowProgramActionListener seeShowProgramActionListener = new SeeShowProgramActionListener(mainWindowView);
         seeShowProgramButton.addActionListener(seeShowProgramActionListener);
+
+        peopleService = new PeopleServiceImpl();
+        JButton seeEmployeesButton = mainWindowView.getSeeEmployeesButton();
+        SeeEmployeesActionListener seeEmployeesActionListener = new SeeEmployeesActionListener(mainWindowView,peopleService.findAllPeople());
+        seeEmployeesButton.addActionListener(seeEmployeesActionListener);
     }
 
     private class AddOrderActionListener implements ActionListener{
@@ -76,6 +84,21 @@ public class MainWindowController {
         public void actionPerformed(ActionEvent e) {
             ShowProgramWindowController showProgramWindowController = new ShowProgramWindowController();
             showProgramWindowController.execut(new ShowProgramWindowView(mainWindowView));
+            mainWindowView.dispose();
+        }
+    }
+
+    private class SeeEmployeesActionListener implements ActionListener{
+        private MainWindowView mainWindowView;
+        private List<People> people;
+        SeeEmployeesActionListener(MainWindowView mainWindowView,List<People> people ){
+            this.mainWindowView = mainWindowView;
+            this.people = people;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            PeopleWindowController peopleWindowController = new PeopleWindowController(people);
+            peopleWindowController.execut(new PeopleWindowView(mainWindowView,"Сотрудники"));
             mainWindowView.dispose();
         }
     }

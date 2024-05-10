@@ -7,7 +7,7 @@ public class MainWindowView extends JFrame {
     private JPanel mainPanel;
     private JTable incomeExpensesTable;
     private JScrollPane jcrollPane;
-    private JButton addOrderButton, delOrderButton, seeShowProgramButton;
+    private JButton addOrderButton, delOrderButton, seeShowProgramButton,seeEmployeesButton;
     private JPanel buttonPanel;
     public MainWindowView(){
         super("Lumos Бухгалтерия");
@@ -34,6 +34,8 @@ public class MainWindowView extends JFrame {
         delOrderButton = new JButton("Удалить заказ");
 
         seeShowProgramButton = new JButton("Шоу-программы");
+
+        seeEmployeesButton = new JButton("Сотрудники");
     }
     private void placeComponents(){
         jcrollPane = new JScrollPane(incomeExpensesTable);
@@ -42,9 +44,14 @@ public class MainWindowView extends JFrame {
         mainPanel.add(jcrollPane);
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
+        addOrderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(addOrderButton);
+        delOrderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(delOrderButton);
+        seeShowProgramButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(seeShowProgramButton);
+        seeEmployeesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(seeEmployeesButton);
 
         mainPanel.add(buttonPanel);
 
@@ -59,4 +66,5 @@ public class MainWindowView extends JFrame {
     }
     public JButton getDelOrderButton(){return delOrderButton;}
     public JButton getSeeShowProgramButton(){return seeShowProgramButton;}
+    public JButton getSeeEmployeesButton(){return seeEmployeesButton;}
 }

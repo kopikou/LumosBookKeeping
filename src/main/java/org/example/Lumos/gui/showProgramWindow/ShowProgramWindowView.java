@@ -44,10 +44,15 @@ public class ShowProgramWindowView extends JFrame {
         jcrollPane = new JScrollPane(showProgramTable);
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
+        addShowProgramButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(addShowProgramButton);
+        delShowProgramButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(delShowProgramButton);
+        seeArtistsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(seeArtistsButton);
+        seeTechniciansButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(seeTechniciansButton);
+        seeTransferButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(seeTransferButton);
 
         mainPanel.add(jcrollPane);

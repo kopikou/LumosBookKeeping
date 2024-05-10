@@ -1,26 +1,15 @@
 package org.example.Lumos.gui.newShowProgramWindow;
 
-import org.example.Lumos.domain.entity.Expense;
-import org.example.Lumos.domain.entity.Income;
-import org.example.Lumos.domain.entity.People;
 import org.example.Lumos.domain.entity.ShowProgram;
-import org.example.Lumos.gui.mainWindow.MainWindowController;
-import org.example.Lumos.gui.mainWindow.MainWindowView;
-import org.example.Lumos.gui.orderWindow.OrderWindowView;
 import org.example.Lumos.gui.showProgramWindow.ShowProgramWindowController;
 import org.example.Lumos.gui.showProgramWindow.ShowProgramWindowView;
 import org.example.Lumos.hibernate.services.ShowProgramServiceImpl;
-import org.jdesktop.swingx.JXDatePicker;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class NewShowProgramWindowController {
     private ShowProgramServiceImpl showProgramService;

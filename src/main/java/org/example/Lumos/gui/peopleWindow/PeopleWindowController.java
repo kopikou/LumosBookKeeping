@@ -11,6 +11,9 @@ public class PeopleWindowController {
     private JList<String> peopleList;
     private List<People> people;
     private DefaultListModel<String> persons = new DefaultListModel<String>();
+    private JTextField nameTextField;
+    private JComboBox personComboBox;
+    private JButton addPersonButton;
     public PeopleWindowController(List<People> people){
         this.people = people;
     }
@@ -29,5 +32,21 @@ public class PeopleWindowController {
             persons.addElement(people.get(i).getName());
         }
         peopleList.setModel(persons);
+
+        nameTextField = peopleWindowView.getNameTextField();
+        personComboBox = peopleWindowView.getPersonComboBox();
+
+        addPersonButton = peopleWindowView.getAddPersonButton();
+
+        if(peopleWindowView.getTitle().equals("Сотрудники")){
+            nameTextField.setVisible(true);
+            personComboBox.setVisible(false);
+        }else{
+            nameTextField.setVisible(false);
+            personComboBox.setVisible(true);
+        }
+
     }
+
+
 }
