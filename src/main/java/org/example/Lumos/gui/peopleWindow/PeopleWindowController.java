@@ -1,8 +1,12 @@
 package org.example.Lumos.gui.peopleWindow;
 
 import org.example.Lumos.domain.entity.People;
+import org.example.Lumos.domain.entity.ShowProgram;
+import org.example.Lumos.hibernate.services.PeopleServiceImpl;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
@@ -13,11 +17,21 @@ public class PeopleWindowController {
     private DefaultListModel<String> persons = new DefaultListModel<String>();
     private JTextField nameTextField;
     private JComboBox personComboBox;
-    private JButton addPersonButton;
+    private JButton addPersonButton,delPersonButton;
+    private PeopleServiceImpl peopleService;
+    private PeopleWindowView peopleWindowView;
+    private ShowProgram showProgram;
+    private List<People> allPersons;
     public PeopleWindowController(List<People> people){
         this.people = people;
     }
+    public PeopleWindowController(ShowProgram showProgram, List<People> people){
+        this.showProgram = showProgram;
+        this.people = people;
+    }
     public void execut(PeopleWindowView peopleWindowView){
+        this.peopleWindowView = peopleWindowView;
+
         JFrame parentFrame = peopleWindowView.getParentFrame();
         peopleWindowView.addWindowListener(new WindowAdapter() {
             @Override
@@ -27,9 +41,11 @@ public class PeopleWindowController {
             }
         });
 
+        peopleService = new PeopleServiceImpl();
+
         peopleList = peopleWindowView.getPeopleList();
-        for(int i = 0; i < people.size(); i++){
-            persons.addElement(people.get(i).getName());
+        for (People value : people) {
+            persons.addElement(value.getName());
         }
         peopleList.setModel(persons);
 
@@ -37,6 +53,8 @@ public class PeopleWindowController {
         personComboBox = peopleWindowView.getPersonComboBox();
 
         addPersonButton = peopleWindowView.getAddPersonButton();
+        addPersonButton.addActionListener(new AddPersonActionListener());
+        //addPersonButton.setEnabled(false);
 
         if(peopleWindowView.getTitle().equals("Сотрудники")){
             nameTextField.setVisible(true);
@@ -44,9 +62,85 @@ public class PeopleWindowController {
         }else{
             nameTextField.setVisible(false);
             personComboBox.setVisible(true);
-        }
 
+            allPersons = peopleService.findAllPeople();
+            for(int i = 0; i < allPersons.size(); i++){
+                for (People person : people) {
+                    if (allPersons.get(i).getName().equals(person.getName())) {
+                        allPersons.remove(i);
+                    }
+                }
+            }
+            for (People person : allPersons) {
+                personComboBox.addItem(person.getName());
+            }
+        }
+        personComboBox.setSelectedItem(null);
+
+        delPersonButton = peopleWindowView.getDelPersonButton();
+        delPersonButton.addActionListener(new DelPeopleActionListener());
     }
 
+    private class AddPersonActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(nameTextField.isVisible()){
+                if(!nameTextField.getText().isEmpty()){
+                    //addPersonButton.setEnabled(true);
+                    People person = new People(nameTextField.getText());
+                    peopleService.savePeople(person);
 
+                    people.add(person);
+
+                    //PeopleWindowController peopleWindowController = new PeopleWindowController(people);
+                    //peopleWindowController.execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                    peopleWindowView.dispose();
+                    execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                }else{
+                    JOptionPane.showMessageDialog(peopleWindowView,
+                            "Ошибка записи. Пожалуйста, заполните все поля.",
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
+            }if (personComboBox.isVisible()){
+                if(personComboBox.getSelectedItem() != null){
+                    //List<People> persons = peopleService.findAllPeople();
+                    switch (peopleWindowView.getTitle()){
+                        case "Артисты":{
+                            showProgram.addArtist(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
+                        }
+                        case "Техники":{
+
+                        }
+                        case "Трансфер":{
+                            showProgram.addTransfer(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
+                        }
+                    }
+                    peopleWindowView.dispose();
+                    execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                }
+
+            }
+        }
+    }
+
+    private class DelPeopleActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(nameTextField.isVisible()){
+                try{
+                    People person = peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId());
+                    //person.setName(peopleList.getSelectedValue());
+
+                    peopleService.deletePeople(person);
+
+                    people.remove(peopleList.getSelectedIndex());
+                    peopleWindowView.dispose();
+                    execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                }catch (IndexOutOfBoundsException ex){
+                }
+            }if (personComboBox.isVisible()){
+
+            }
+        }
+    }
 }

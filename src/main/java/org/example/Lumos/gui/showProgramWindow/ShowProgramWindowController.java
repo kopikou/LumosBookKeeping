@@ -65,7 +65,7 @@ public class ShowProgramWindowController {
         public void actionPerformed(ActionEvent e) {
             try {
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
-                PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram.getArtists());
+                PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getArtists());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Артисты"));
                 showProgramWindowView.dispose();
             }catch (IndexOutOfBoundsException ex){
@@ -81,7 +81,7 @@ public class ShowProgramWindowController {
         public void actionPerformed(ActionEvent e) {
             try {
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
-                PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram.getTechnicians());
+                PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTechnicians());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Техники"));
                 showProgramWindowView.dispose();
             }catch (IndexOutOfBoundsException ex){
@@ -97,7 +97,7 @@ public class ShowProgramWindowController {
         public void actionPerformed(ActionEvent e) {
             try {
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
-                PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram.getTransfers());
+                PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTransfers());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Трансфер"));
                 showProgramWindowView.dispose();
             }catch (IndexOutOfBoundsException ex){
