@@ -170,8 +170,14 @@ public class ShowProgram {
     public void addTransfer(People people){
         transfers.add(people);
     }
-    public void removeTransfer(People people){
-        transfers.remove(people);
+    public void removeTransfer(People people,int id){
+        /*for(int i = 0; i < transfers.size(); i++){
+            if(people == transfers.get(i)){
+                transfers.remove(i);
+            }
+        }*/
+        transfers.remove(id);
+        //transfers.remove(people);
     }
 
     public void addIncome(Income income){

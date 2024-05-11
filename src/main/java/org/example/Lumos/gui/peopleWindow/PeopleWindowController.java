@@ -3,12 +3,14 @@ package org.example.Lumos.gui.peopleWindow;
 import org.example.Lumos.domain.entity.People;
 import org.example.Lumos.domain.entity.ShowProgram;
 import org.example.Lumos.hibernate.services.PeopleServiceImpl;
+import org.example.Lumos.hibernate.services.ShowProgramServiceImpl;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PeopleWindowController {
@@ -19,9 +21,10 @@ public class PeopleWindowController {
     private JComboBox personComboBox;
     private JButton addPersonButton,delPersonButton;
     private PeopleServiceImpl peopleService;
+    private ShowProgramServiceImpl showProgramService;
     private PeopleWindowView peopleWindowView;
     private ShowProgram showProgram;
-    private List<People> allPersons;
+    private List<People> allPersons;// = new ArrayList<>();
     public PeopleWindowController(List<People> people){
         this.people = people;
     }
@@ -42,6 +45,7 @@ public class PeopleWindowController {
         });
 
         peopleService = new PeopleServiceImpl();
+        showProgramService = new ShowProgramServiceImpl();
 
         peopleList = peopleWindowView.getPeopleList();
         for (People value : people) {
@@ -63,11 +67,13 @@ public class PeopleWindowController {
             nameTextField.setVisible(false);
             personComboBox.setVisible(true);
 
+            //List<People>
             allPersons = peopleService.findAllPeople();
             for(int i = 0; i < allPersons.size(); i++){
                 for (People person : people) {
                     if (allPersons.get(i).getName().equals(person.getName())) {
                         allPersons.remove(i);
+                        //allPersons.add(person);
                     }
                 }
             }
@@ -92,10 +98,11 @@ public class PeopleWindowController {
 
                     people.add(person);
 
-                    //PeopleWindowController peopleWindowController = new PeopleWindowController(people);
-                    //peopleWindowController.execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
                     peopleWindowView.dispose();
-                    execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                    PeopleWindowController peopleWindowController = new PeopleWindowController(people);
+                    peopleWindowController.execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+
+                    //execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
                 }else{
                     JOptionPane.showMessageDialog(peopleWindowView,
                             "Ошибка записи. Пожалуйста, заполните все поля.",
@@ -107,16 +114,27 @@ public class PeopleWindowController {
                     switch (peopleWindowView.getTitle()){
                         case "Артисты":{
                             showProgram.addArtist(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
+                            showProgramService.updateShowProgram(showProgram);
                         }
                         case "Техники":{
-
+                            showProgram.addTechnician(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
+                            showProgramService.updateShowProgram(showProgram);
                         }
                         case "Трансфер":{
                             showProgram.addTransfer(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
+                            showProgramService.updateShowProgram(showProgram);
                         }
                     }
+                    people.add(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
                     peopleWindowView.dispose();
-                    execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                    PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,people);
+                    peopleWindowController.execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+
+                    //execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                }else{
+                    JOptionPane.showMessageDialog(peopleWindowView,
+                            "Ошибка записи. Пожалуйста, заполните все поля.",
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -134,12 +152,40 @@ public class PeopleWindowController {
                     peopleService.deletePeople(person);
 
                     people.remove(peopleList.getSelectedIndex());
+
                     peopleWindowView.dispose();
-                    execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                    PeopleWindowController peopleWindowController = new PeopleWindowController(people);
+                    peopleWindowController.execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+
+                    //execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
                 }catch (IndexOutOfBoundsException ex){
                 }
             }if (personComboBox.isVisible()){
+                try{
+                    switch (peopleWindowView.getTitle()){
+                        case "Артисты":{
+                            showProgram.removeArtist(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()));
+                            showProgramService.updateShowProgram(showProgram);
+                        }
+                        case "Техники":{
+                            showProgram.removeTechnician(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()));
+                            showProgramService.updateShowProgram(showProgram);
+                        }
+                        case "Трансфер":{
+                            showProgram.removeTransfer(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()),peopleList.getSelectedIndex());
+                            showProgramService.updateShowProgram(showProgram);
+                        }
+                    }
+                    people.remove(peopleList.getSelectedIndex());
+                    peopleList.removeAll();
 
+                    peopleWindowView.dispose();
+                    PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,people);
+                    peopleWindowController.execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+
+                    //execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
+                }catch (IndexOutOfBoundsException ex){
+                }
             }
         }
     }
