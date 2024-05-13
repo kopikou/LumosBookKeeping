@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class NewShowProgramWindowView extends JFrame {
     private JPanel mainPanel,titlePanel, pricePanel, artistsPanel,technicicansPanel,transferPanel;
-    private JFrame parent;
+    private final JFrame parent;
     private JLabel titleLabel, priceLabel, artistsCntLabel,technicicansCntLabel,transferCntLabel,artistSalaryLabel,technicianSalaryLabel,transferCostLabel;
     private JTextField titleTextField;
     private JSpinner priceSpinner,artistsCntSpinner,techniciansCntSpinner,transferCntSpinner,artistSalarySpinner,technicianSalarySpinner,transferCostSpinner;

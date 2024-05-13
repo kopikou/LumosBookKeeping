@@ -16,6 +16,7 @@ public class NewShowProgramWindowController {
     private JButton addButton;
     public void execut(NewShowProgramWindowView newShowProgramWindowView){
         JFrame parentFrame = newShowProgramWindowView.getParentFrame();
+
         newShowProgramWindowView.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -26,14 +27,15 @@ public class NewShowProgramWindowController {
 
         showProgramService = new ShowProgramServiceImpl();
 
+        //Назначили кнопке добавления шоу-программы слушателя
         addButton = newShowProgramWindowView.getAddButton();
         AddButtonActionListener addButtonActionListener = new AddButtonActionListener(newShowProgramWindowView);
         addButton.addActionListener(addButtonActionListener);
     }
 
     private class AddButtonActionListener implements ActionListener {
-        private ShowProgramWindowView parentFrame;
-        private NewShowProgramWindowView newShowProgramWindowView;
+        private final ShowProgramWindowView parentFrame;
+        private final NewShowProgramWindowView newShowProgramWindowView;
         AddButtonActionListener(NewShowProgramWindowView newShowProgramWindowView){
             this.newShowProgramWindowView = newShowProgramWindowView;
             parentFrame = (ShowProgramWindowView) newShowProgramWindowView.getParentFrame();
@@ -41,7 +43,9 @@ public class NewShowProgramWindowController {
         @Override
         public void actionPerformed(ActionEvent e) {
             JTextField titleTextField = newShowProgramWindowView.getTitleTextField();
+            //Если указано название шоу-программы
             if(!titleTextField.getText().isEmpty()) {
+                //Создаем новую шоу-программу
                 ShowProgram showProgram = new ShowProgram();
                 showProgram.setTitle(titleTextField.getText());
                 showProgram.setPrice((int)newShowProgramWindowView.getPriceSpinner().getValue());
@@ -54,6 +58,7 @@ public class NewShowProgramWindowController {
 
                 showProgramService.saveShowProgram(showProgram);
 
+                //Возвращаемся к окну просмотра шоу-программ
                 ShowProgramWindowController showProgramWindowController = new ShowProgramWindowController();
                 showProgramWindowController.execut(new ShowProgramWindowView(parentFrame.getParentFrame()));
                 newShowProgramWindowView.dispose();

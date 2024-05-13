@@ -4,10 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ShowProgramWindowView extends JFrame {
-    private JFrame parent;
+    private final JFrame parent;
     private JPanel mainPanel,buttonPanel;
     private JTable showProgramTable;
-    private JScrollPane jcrollPane;
     private JButton seeArtistsButton,seeTechniciansButton,seeTransferButton,addShowProgramButton,delShowProgramButton;
     public ShowProgramWindowView(JFrame parent){
         super("Шоу-программы");
@@ -41,7 +40,7 @@ public class ShowProgramWindowView extends JFrame {
     private void placeComponents(){
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.X_AXIS));
 
-        jcrollPane = new JScrollPane(showProgramTable);
+        JScrollPane jcrollPane = new JScrollPane(showProgramTable);
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
         addShowProgramButton.setAlignmentX(Component.CENTER_ALIGNMENT);

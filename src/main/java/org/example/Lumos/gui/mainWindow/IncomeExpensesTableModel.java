@@ -46,6 +46,7 @@ public class IncomeExpensesTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex){
             case 0: {
+                //Если первая строка или текущая строка не равна предыдущей
                 if(rowIndex == 0 || expenses.get(rowIndex).getIncome() != expenses.get(rowIndex-1).getIncome())//rowIndex == expenses.get(rowIndex).getIncome().getExpenses().size())
                     return expenses.get(rowIndex).getIncome().getDate();
                 else return null;

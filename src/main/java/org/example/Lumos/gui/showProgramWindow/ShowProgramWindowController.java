@@ -14,7 +14,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ShowProgramWindowController {
-    private ShowProgramServiceImpl showProgramService = new ShowProgramServiceImpl();
+    private final ShowProgramServiceImpl showProgramService = new ShowProgramServiceImpl();
     private JTable showProgramTable;
     private JButton seeArtistsButton,seeTechniciansButton,seeTransferButton,addShowProgramButton,delShowProgramButton;
     private ShowProgramTableModel showProgramTableModel;
@@ -32,6 +32,7 @@ public class ShowProgramWindowController {
             }
         });
 
+        //Устанавливаем модель для таблицы
         showProgramTable = showProgramWindowView.getShowProgramTable();
         showProgramTableModel = new ShowProgramTableModel(showProgramService);
         showProgramTable.setModel(showProgramTableModel);
@@ -57,60 +58,67 @@ public class ShowProgramWindowController {
         delShowProgramButton.addActionListener(delShowProgramActionListener);
     }
     private class SeeArtistsActionListener implements ActionListener {
-        private ShowProgramWindowView showProgramWindowView;
+        private final ShowProgramWindowView showProgramWindowView;
         SeeArtistsActionListener(ShowProgramWindowView showProgramWindowView){
             this.showProgramWindowView = showProgramWindowView;
         }
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                //Открыть окно просмотра артистов
+                showProgramWindowView.dispose();
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
                 PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getArtists());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Артисты"));
-                showProgramWindowView.dispose();
+
             }catch (IndexOutOfBoundsException ex){
             }
         }
     }
     private class SeeTechniciansActionListener implements ActionListener {
-        private ShowProgramWindowView showProgramWindowView;
+        private final ShowProgramWindowView showProgramWindowView;
         SeeTechniciansActionListener(ShowProgramWindowView showProgramWindowView){
             this.showProgramWindowView = showProgramWindowView;
         }
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                //Открыть окно просмотра техников
+                showProgramWindowView.dispose();
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
                 PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTechnicians());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Техники"));
-                showProgramWindowView.dispose();
+
             }catch (IndexOutOfBoundsException ex){
             }
         }
     }
     private class SeeTransferActionListener implements ActionListener {
-        private ShowProgramWindowView showProgramWindowView;
+        private final ShowProgramWindowView showProgramWindowView;
         SeeTransferActionListener(ShowProgramWindowView showProgramWindowView){
             this.showProgramWindowView = showProgramWindowView;
         }
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                //Открыть окно просмотра трансфера
+                showProgramWindowView.dispose();
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
                 PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTransfers());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Трансфер"));
-                showProgramWindowView.dispose();
+
             }catch (IndexOutOfBoundsException ex){
             }
         }
     }
-    private class AddShowProgramActionListener implements ActionListener{
-        private ShowProgramWindowView showProgramWindowView;
+    private static class AddShowProgramActionListener implements ActionListener{
+        private final ShowProgramWindowView showProgramWindowView;
         AddShowProgramActionListener(ShowProgramWindowView showProgramWindowView){
             this.showProgramWindowView = showProgramWindowView;
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            //Открыть окно добавления шоу-программы
             NewShowProgramWindowController newShowProgramWindowController = new NewShowProgramWindowController();
             newShowProgramWindowController.execut(new NewShowProgramWindowView(showProgramWindowView));
             showProgramWindowView.dispose();
@@ -120,6 +128,7 @@ public class ShowProgramWindowController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                //Удалить выбранную строку из таблицы с шоу-программами
                 showProgramTableModel.delete(showProgramTable.getSelectedRow());
                 showProgramWindowView.dispose();
                 execut(new ShowProgramWindowView(parentFrame));

@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class OrderWindowView extends JFrame {
-    private JFrame parent;
+    private final JFrame parent;
     private JPanel mainPanel,artistsPanel,showPanel,datePanel,placePanel,techniciansPanel,transferPanel;
     private JComboBox showProgramComboBox;
     private JComboBox artistsComboBox1, artistsComboBox2, artistsComboBox3, artistsComboBox4, artistsComboBox5, artistsComboBox6, artistsComboBox7, artistsComboBox8;
@@ -98,7 +98,6 @@ public class OrderWindowView extends JFrame {
         addButton = new JButton("Добавить");
     }
     private void placeComponents(){
-        //mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.X_AXIS));
         showPanel.setLayout(new BoxLayout(showPanel,BoxLayout.Y_AXIS));
         datePanel.setLayout(new BoxLayout(datePanel,BoxLayout.Y_AXIS));
         placePanel.setLayout(new BoxLayout(placePanel,BoxLayout.Y_AXIS));

@@ -6,7 +6,6 @@ import java.awt.*;
 public class MainWindowView extends JFrame {
     private JPanel mainPanel;
     private JTable incomeExpensesTable;
-    private JScrollPane jcrollPane;
     private JButton addOrderButton, delOrderButton, seeShowProgramButton,seeEmployeesButton;
     private JPanel buttonPanel;
     public MainWindowView(){
@@ -38,19 +37,21 @@ public class MainWindowView extends JFrame {
         seeEmployeesButton = new JButton("Сотрудники");
     }
     private void placeComponents(){
-        jcrollPane = new JScrollPane(incomeExpensesTable);
+        JScrollPane jcrollPane = new JScrollPane(incomeExpensesTable);
 
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.X_AXIS));
         mainPanel.add(jcrollPane);
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
+
         addOrderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonPanel.add(addOrderButton);
         delOrderButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonPanel.add(delOrderButton);
         seeShowProgramButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonPanel.add(seeShowProgramButton);
         seeEmployeesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        buttonPanel.add(addOrderButton);
+        buttonPanel.add(delOrderButton);
+        buttonPanel.add(seeShowProgramButton);
         buttonPanel.add(seeEmployeesButton);
 
         mainPanel.add(buttonPanel);

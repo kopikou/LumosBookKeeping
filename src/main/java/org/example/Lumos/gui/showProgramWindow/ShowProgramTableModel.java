@@ -7,8 +7,8 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class ShowProgramTableModel extends AbstractTableModel {
-    private ShowProgramServiceImpl showProgramService;
-    private List<ShowProgram> showPrograms;
+    private final ShowProgramServiceImpl showProgramService;
+    private final List<ShowProgram> showPrograms;
     public ShowProgramTableModel(ShowProgramServiceImpl showProgramService){
         this.showProgramService = showProgramService;
         showPrograms = showProgramService.findAllShowPrograms();

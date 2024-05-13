@@ -6,14 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PeopleWindowView extends JFrame {
-    private JFrame parent;
+    private final JFrame parent;
     private JPanel mainPanel,buttonPanel;
-    private JScrollPane jcrollPane;
     private JList<String> people;
     private JButton addPersonButton,delPersonButton;
     private JTextField nameTextField;
     private JComboBox personComboBox;
-    private String title;
+    private final String title;
     public PeopleWindowView(JFrame parent,String title){
         super(title);
         setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
@@ -48,7 +47,7 @@ public class PeopleWindowView extends JFrame {
         mainPanel.setLayout(new BoxLayout(mainPanel,BoxLayout.X_AXIS));
         buttonPanel.setLayout(new VerticalLayout());
 
-        jcrollPane = new JScrollPane(people);
+        JScrollPane jcrollPane = new JScrollPane(people);
 
         mainPanel.add(jcrollPane);
 
