@@ -15,6 +15,12 @@ public class People {
     private String name;
     @OneToMany(mappedBy = "person",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Expense> expenses;
+    @ManyToMany(mappedBy = "artists")
+    private List<ShowProgram> artistForShow;
+    @ManyToMany(mappedBy = "technicians")
+    private List<ShowProgram> technicianForShow;
+    @ManyToMany(mappedBy = "transfers")
+    private List<ShowProgram> transferForShow;
 
     public People(){
     }
@@ -47,11 +53,37 @@ public class People {
         this.expenses = expenses;
     }
 
+    public List<ShowProgram> getArtistForShow() {
+        return artistForShow;
+    }
+    public void setArtistForShow(List<ShowProgram> artistForShow) {
+        this.artistForShow = artistForShow;
+    }
+
+    public List<ShowProgram> getTechnicianForShow() {
+        return technicianForShow;
+    }
+    public void setTechnicianForShow(List<ShowProgram> technicianForShow) {
+        this.technicianForShow = technicianForShow;
+    }
+
+    public List<ShowProgram> getTransferForShow() {
+        return transferForShow;
+    }
+    public void setTransferForShow(List<ShowProgram> transferForShow) {
+        this.transferForShow = transferForShow;
+    }
+
     @Override
     public String toString() {
         return "People{" +
                 "id=" + id +
-                ", name='" + name;
+                ", name='" + name + '\'' +
+                ", expenses=" + expenses +
+                ", artistForShow=" + artistForShow +
+                ", technicianForShow=" + technicianForShow +
+                ", transferForShow=" + transferForShow +
+                '}';
     }
 
     @Override
@@ -59,11 +91,11 @@ public class People {
         if (this == o) return true;
         if (!(o instanceof People)) return false;
         People people = (People) o;
-        return getId() == people.getId() && Objects.equals(getName(), people.getName()) && Objects.equals(getExpenses(), people.getExpenses());
+        return getId() == people.getId() && Objects.equals(getName(), people.getName()) && Objects.equals(getExpenses(), people.getExpenses()) && Objects.equals(getArtistForShow(), people.getArtistForShow()) && Objects.equals(getTechnicianForShow(), people.getTechnicianForShow()) && Objects.equals(getTransferForShow(), people.getTransferForShow());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getExpenses());
+        return Objects.hash(getId(), getName(), getExpenses(), getArtistForShow(), getTechnicianForShow(), getTransferForShow());
     }
 }

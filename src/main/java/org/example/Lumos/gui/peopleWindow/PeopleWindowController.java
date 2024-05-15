@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PeopleWindowController {
@@ -24,7 +23,7 @@ public class PeopleWindowController {
     private ShowProgramServiceImpl showProgramService;
     private PeopleWindowView peopleWindowView;
     private ShowProgram showProgram;
-    private List<People> allPersons;// = new ArrayList<>();
+    private List<People> allPersons;
     public PeopleWindowController(){}
     public PeopleWindowController(List<People> people){
         this.people = people;
@@ -67,17 +66,11 @@ public class PeopleWindowController {
             nameTextField.setVisible(false);
             personComboBox.setVisible(true);
 
-
             allPersons = peopleService.findAllPeople();
-            //allPersons = new ArrayList<>();
-            List<People> lalal = peopleService.findAllPeople();
             for(int i = 0; i < allPersons.size(); i++){
-                //for (People person : people) {
                 for(int j = 0; j < people.size(); j++){
                     if (allPersons.get(i).getName().equals(people.get(j).getName())) {
                         allPersons.remove(i);
-                        //allPersons.remove(lalal.get(i));
-                        //allPersons.
                     }
                 }
             }
@@ -121,16 +114,19 @@ public class PeopleWindowController {
                             showProgram.addArtist(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getArtists());
+                            break;
                         }
                         case "Техники":{
                             showProgram.addTechnician(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTechnicians());
+                            break;
                         }
                         case "Трансфер":{
                             showProgram.addTransfer(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTransfers());
+                            break;
                         }
                     }
                     //people.add(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
@@ -178,16 +174,19 @@ public class PeopleWindowController {
                             showProgram.removeArtist(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()));
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getArtists());
+                            break;
                         }
                         case "Техники":{
                             showProgram.removeTechnician(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()));
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTechnicians());
+                            break;
                         }
                         case "Трансфер":{
                             showProgram.removeTransfer(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()),peopleList.getSelectedIndex());
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTransfers());
+                            break;
                         }
                     }
                     //people.remove(peopleList.getSelectedIndex());

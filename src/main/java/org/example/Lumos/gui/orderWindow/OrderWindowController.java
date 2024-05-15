@@ -12,10 +12,7 @@ import org.example.Lumos.hibernate.services.ShowProgramServiceImpl;
 import org.jdesktop.swingx.JXDatePicker;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +84,7 @@ public class OrderWindowController {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            //При выборе какого1-то шоу-программы открываем доступ к остальным полям формы
+            //При выборе какой-то шоу-программы открываем доступ к остальным полям формы
             placeTextField.setEnabled(true);
             addButton.setEnabled(true);
             picker.setEnabled(true);
@@ -98,13 +95,14 @@ public class OrderWindowController {
                     id = i;
             }
 
+            //Заполняем выпадающие списки артистами
             int artictsCnt = showPrograms.get(id).getArtistsCnt();
             cleanComboBox(artistsComboBoxes);
-            //Заполняем выпадающие списки артистами
             for (int i = 0; i < showPrograms.get(id).getArtists().size(); i++){
                 for (int j = 0; j < artictsCnt; j++){
                     artistsComboBoxes.get(j).addItem(showPrograms.get(id).getArtists().get(i).getName());
                     artistsComboBoxes.get(j).setEnabled(true);
+                    artistsComboBoxes.get(j).setSelectedItem(null);
                 }
             }
 
@@ -115,6 +113,7 @@ public class OrderWindowController {
                 for (int j = 0; j < techniciansCnt; j++){
                     techniciansComboBoxes.get(j).addItem(showPrograms.get(id).getTechnicians().get(i).getName());
                     techniciansComboBoxes.get(j).setEnabled(true);
+                    techniciansComboBoxes.get(j).setSelectedItem(null);
                 }
             }
 
@@ -125,13 +124,14 @@ public class OrderWindowController {
                 for (int j = 0; j < transferCnt; j++){
                     transferComboBoxes.get(j).addItem(showPrograms.get(id).getTransfers().get(i).getName());
                     transferComboBoxes.get(j).setEnabled(true);
+                    transferComboBoxes.get(j).setSelectedItem(null);
                 }
             }
         }
         private void cleanComboBox(List<JComboBox> comboBoxes){
-            for (int i = 0; i < comboBoxes.size(); i++){
-                comboBoxes.get(i).removeAllItems();
-                comboBoxes.get(i).setEnabled(false);
+            for (JComboBox comboBox : comboBoxes) {
+                comboBox.removeAllItems();
+                comboBox.setEnabled(false);
             }
         }
     }
@@ -144,19 +144,63 @@ public class OrderWindowController {
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            int id = 0;//Запоминаем id шоу-программы из БД
+            for (int i = 0; i < showPrograms.size(); i++) {
+                if (showProgramComboBox.getSelectedItem() == showPrograms.get(i).getTitle()) {
+                    id = i;
+                }
+            }
+
             JTextField placeTextField = orderFrame.getPlaceTextField();
-            //Если выбрана какая-то шоу-программа из списка и указано место проведения заказа
-            if(showProgramComboBox.getSelectedItem() != null && !placeTextField.getText().isEmpty()) {
+
+            boolean emptyArtists = false;
+            boolean emptyTechnicians = false;
+            boolean emptyTransfer = false;
+            boolean sameArtists = false;
+            boolean sameTechnicians = false;
+            boolean sameTransfer = false;
+            //Есть ли незаполненые поля
+            for(int i = 0; i < showPrograms.get(id).getArtistsCnt();i++){
+                if(artistsComboBoxes.get(i).getSelectedItem() == null){
+                    emptyArtists = true;
+                }
+            }
+            //Есть ли дублирующиеся поля
+            for(int i = 0; i < showPrograms.get(id).getArtistsCnt()-1;i++){
+                if(artistsComboBoxes.get(i).getSelectedItem() == artistsComboBoxes.get(i+1).getSelectedItem()){
+                    sameArtists = true;
+                }
+            }
+
+            //Есть ли незаполненые поля
+            for(int i = 0; i < showPrograms.get(id).getTechniciansCnt();i++){
+                if(techniciansComboBoxes.get(i).getSelectedItem() == null){
+                    emptyTechnicians = true;
+                }
+            }//Есть ли дублирующиеся поля
+            for(int i = 0; i < showPrograms.get(id).getTechniciansCnt()-1;i++){
+                if(techniciansComboBoxes.get(i).getSelectedItem() == techniciansComboBoxes.get(i+1).getSelectedItem()){
+                    sameTechnicians = true;
+                }
+            }
+
+            //Есть ли незаполненые поля
+            for(int i = 0; i < showPrograms.get(id).getTransferCnt();i++){
+                if(transferComboBoxes.get(i).getSelectedItem() == null){
+                    emptyTransfer = true;
+                }
+            }//Есть ли дублирующиеся поля
+            for(int i = 0; i < showPrograms.get(id).getTransferCnt()-1;i++){
+                if(transferComboBoxes.get(i).getSelectedItem() == transferComboBoxes.get(i+1).getSelectedItem()){
+                    sameTransfer = true;
+                }
+            }
+
+            //Если выбрана какая-то шоу-программа из списка, указано место проведения заказа, выбраны сотрудники
+            if(showProgramComboBox.getSelectedItem() != null && !placeTextField.getText().isEmpty() && !emptyArtists && !emptyTechnicians && !emptyTransfer && !sameArtists && !sameTechnicians && !sameTransfer) {
                 Income income = new Income();
 
-                int id = 0;//Запоминаем id шоу-программы из БД
-                for (int i = 0; i < showPrograms.size(); i++) {
-                    if (showProgramComboBox.getSelectedItem() == showPrograms.get(i).getTitle()) {
-                        income.setShowProgram(showPrograms.get(i));
-                        id = i;
-                    }
-                }
-
+                income.setShowProgram(showPrograms.get(id));
                 income.setPlace(placeTextField.getText());
 
                 JXDatePicker picker = orderFrame.getPicker();
@@ -187,8 +231,6 @@ public class OrderWindowController {
                                     salary.set(k, salary.get(k) + showPrograms.get(id).getTechnicianSalary());//Увеличить зарплату
                                     flag = true;
                                     break;
-                                } else {
-                                    flag = false;
                                 }
                             }
                             if (!flag) {//Если человек ранее не был в списке сотрудников, добавить его в список
@@ -208,8 +250,6 @@ public class OrderWindowController {
                                     salary.set(k, salary.get(k) + showPrograms.get(id).getTransferCost());
                                     flag = true;
                                     break;
-                                } else {
-                                    flag = false;
                                 }
                             }
                             if (!flag) {
@@ -220,13 +260,11 @@ public class OrderWindowController {
                     }
                 }
 
-                //List<Expense> expenses = new ArrayList<>();
                 for (int i = 0; i < people.size(); i++) {
                     Expense expense = new Expense(salary.get(i), people.get(i), income);
                     expense.setIncome(income);
                     expense.setPerson(people.get(i));
                     expense.setSalary(salary.get(i));
-                    //expenses.add(expense);
                     expenseService.saveExpense(expense);
                 }
                 //Открываем главное окно программы
@@ -240,4 +278,5 @@ public class OrderWindowController {
             }
         }
     }
+
 }
