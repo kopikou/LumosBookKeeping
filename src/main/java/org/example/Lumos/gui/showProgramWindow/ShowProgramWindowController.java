@@ -16,7 +16,6 @@ import java.awt.event.WindowEvent;
 public class ShowProgramWindowController {
     private final ShowProgramServiceImpl showProgramService = new ShowProgramServiceImpl();
     private JTable showProgramTable;
-    private JButton seeArtistsButton,seeTechniciansButton,seeTransferButton,addShowProgramButton,delShowProgramButton;
     private ShowProgramTableModel showProgramTableModel;
     private ShowProgramWindowView showProgramWindowView;
     private JFrame parentFrame;
@@ -37,23 +36,23 @@ public class ShowProgramWindowController {
         showProgramTableModel = new ShowProgramTableModel(showProgramService);
         showProgramTable.setModel(showProgramTableModel);
 
-        seeArtistsButton = showProgramWindowView.getSeeArtistsButton();
+        JButton seeArtistsButton = showProgramWindowView.getSeeArtistsButton();
         SeeArtistsActionListener seeArtistsActionListener = new SeeArtistsActionListener(showProgramWindowView);
         seeArtistsButton.addActionListener(seeArtistsActionListener);
 
-        seeTechniciansButton = showProgramWindowView.getSeeTechniciansButton();
+        JButton seeTechniciansButton = showProgramWindowView.getSeeTechniciansButton();
         SeeTechniciansActionListener seeTechniciansActionListener = new SeeTechniciansActionListener(showProgramWindowView);
         seeTechniciansButton.addActionListener(seeTechniciansActionListener);
 
-        seeTransferButton = showProgramWindowView.getSeeTransferButton();
+        JButton seeTransferButton = showProgramWindowView.getSeeTransferButton();
         SeeTransferActionListener seeTransferActionListener = new SeeTransferActionListener(showProgramWindowView);
         seeTransferButton.addActionListener(seeTransferActionListener);
 
-        addShowProgramButton = showProgramWindowView.getAddShowProgramButton();
+        JButton addShowProgramButton = showProgramWindowView.getAddShowProgramButton();
         AddShowProgramActionListener addShowProgramActionListener = new AddShowProgramActionListener(showProgramWindowView);
         addShowProgramButton.addActionListener(addShowProgramActionListener);
 
-        delShowProgramButton = showProgramWindowView.getDelShowProgramButton();
+        JButton delShowProgramButton = showProgramWindowView.getDelShowProgramButton();
         DelShowProgramActionListener delShowProgramActionListener = new DelShowProgramActionListener();
         delShowProgramButton.addActionListener(delShowProgramActionListener);
     }
@@ -70,8 +69,7 @@ public class ShowProgramWindowController {
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
                 PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getArtists());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Артисты"));
-
-            }catch (IndexOutOfBoundsException ex){
+            }catch (IndexOutOfBoundsException ignored){
             }
         }
     }
@@ -88,8 +86,7 @@ public class ShowProgramWindowController {
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
                 PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTechnicians());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Техники"));
-
-            }catch (IndexOutOfBoundsException ex){
+            }catch (IndexOutOfBoundsException ignored){
             }
         }
     }
@@ -106,8 +103,7 @@ public class ShowProgramWindowController {
                 ShowProgram showProgram = showProgramService.findShowProgram(showProgramService.findAllShowPrograms().get(showProgramTable.getSelectedRow()).getId());
                 PeopleWindowController peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTransfers());
                 peopleWindowController.execut(new PeopleWindowView(showProgramWindowView, "Трансфер"));
-
-            }catch (IndexOutOfBoundsException ex){
+            }catch (IndexOutOfBoundsException ignored){
             }
         }
     }
@@ -132,7 +128,7 @@ public class ShowProgramWindowController {
                 showProgramTableModel.delete(showProgramTable.getSelectedRow());
                 showProgramWindowView.dispose();
                 execut(new ShowProgramWindowView(parentFrame));
-            }catch (IndexOutOfBoundsException ex){
+            }catch (IndexOutOfBoundsException ignored){
             }
         }
     }

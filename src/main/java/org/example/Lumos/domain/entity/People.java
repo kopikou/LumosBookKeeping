@@ -35,9 +35,6 @@ public class People {
     public int getId() {
         return id;
     }
-    /*public void setId(int id) {
-        this.id = id;
-    }*/
 
     public String getName() {
         return name;
@@ -80,9 +77,9 @@ public class People {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", expenses=" + expenses +
-                ", artistForShow=" + artistForShow +
-                ", technicianForShow=" + technicianForShow +
-                ", transferForShow=" + transferForShow +
+                //", artistForShow=" + artistForShow +
+                //", technicianForShow=" + technicianForShow +
+                //", transferForShow=" + transferForShow +
                 '}';
     }
 

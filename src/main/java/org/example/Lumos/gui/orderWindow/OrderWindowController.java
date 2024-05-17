@@ -196,8 +196,18 @@ public class OrderWindowController {
                 }
             }
 
+            //Техник не может быть артистом
+            boolean artistOrTechnician = false;
+            for (int i = 0; i < showPrograms.get(id).getArtistsCnt();i++){
+                for (int j = 0; j < showPrograms.get(id).getTechniciansCnt();j++){
+                    if(artistsComboBoxes.get(i).getSelectedItem() == techniciansComboBoxes.get(j).getSelectedItem()){
+                        artistOrTechnician = true;
+                    }
+                }
+            }
+
             //Если выбрана какая-то шоу-программа из списка, указано место проведения заказа, выбраны сотрудники
-            if(showProgramComboBox.getSelectedItem() != null && !placeTextField.getText().isEmpty() && !emptyArtists && !emptyTechnicians && !emptyTransfer && !sameArtists && !sameTechnicians && !sameTransfer) {
+            if(showProgramComboBox.getSelectedItem() != null && !placeTextField.getText().isEmpty() && !emptyArtists && !emptyTechnicians && !emptyTransfer && !sameArtists && !sameTechnicians && !sameTransfer && !artistOrTechnician) {
                 Income income = new Income();
 
                 income.setShowProgram(showPrograms.get(id));
@@ -272,9 +282,19 @@ public class OrderWindowController {
                 mainWindowController.execut(new MainWindowView(),incomeService,expenseService);
                 orderFrame.dispose();
             }else{
-                JOptionPane.showMessageDialog(orderFrame,
-                        "Ошибка записи. Пожалуйста, заполните все поля.",
-                        "Ошибка", JOptionPane.ERROR_MESSAGE);
+                if(sameArtists || sameTechnicians || sameTransfer){
+                    JOptionPane.showMessageDialog(orderFrame,
+                            "Ошибка записи: дублирующиеся поля. Пожалуйста, исправьте дублирующиеся поля.",
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }else if(artistOrTechnician){
+                    JOptionPane.showMessageDialog(orderFrame,
+                            "Ошибка записи: артист не может быть техником. Пожалуйста, исправьте поля.",
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }else {
+                    JOptionPane.showMessageDialog(orderFrame,
+                            "Ошибка записи. Пожалуйста, заполните все поля.",
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 
 public class NewShowProgramWindowController {
     private ShowProgramServiceImpl showProgramService;
-    private JButton addButton;
+
     public void execut(NewShowProgramWindowView newShowProgramWindowView){
         JFrame parentFrame = newShowProgramWindowView.getParentFrame();
 
@@ -28,7 +28,7 @@ public class NewShowProgramWindowController {
         showProgramService = new ShowProgramServiceImpl();
 
         //Назначили кнопке добавления шоу-программы слушателя
-        addButton = newShowProgramWindowView.getAddButton();
+        JButton addButton = newShowProgramWindowView.getAddButton();
         AddButtonActionListener addButtonActionListener = new AddButtonActionListener(newShowProgramWindowView);
         addButton.addActionListener(addButtonActionListener);
     }

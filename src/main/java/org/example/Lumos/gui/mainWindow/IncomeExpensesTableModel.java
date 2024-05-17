@@ -9,14 +9,12 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class IncomeExpensesTableModel extends AbstractTableModel {
-    private List<Income> incomes;
-    private List<Expense> expenses;
-    private IncomeServiceImpl incomeService;
-    private ExpenseServiceImpl expenseService;
+    private final List<Expense> expenses;
+    private final IncomeServiceImpl incomeService;
+    private final ExpenseServiceImpl expenseService;
     public IncomeExpensesTableModel(IncomeServiceImpl incomeService, ExpenseServiceImpl expenseService){
         this.incomeService = incomeService;
         this.expenseService = expenseService;
-        incomes = incomeService.findAllIncome();
         expenses = expenseService.findAllExpense();
     }
     @Override

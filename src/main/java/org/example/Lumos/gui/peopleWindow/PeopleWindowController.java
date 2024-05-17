@@ -16,10 +16,9 @@ import java.util.List;
 public class PeopleWindowController {
     private JList<String> peopleList;
     private List<People> people;
-    private DefaultListModel<String> persons = new DefaultListModel<String>();
+    private final DefaultListModel<String> persons = new DefaultListModel<String>();
     private JTextField nameTextField;
     private JComboBox personComboBox;
-    private JButton addPersonButton,delPersonButton;
     private PeopleServiceImpl peopleService;
     private ShowProgramServiceImpl showProgramService;
     private PeopleWindowView peopleWindowView;
@@ -58,7 +57,7 @@ public class PeopleWindowController {
         nameTextField = peopleWindowView.getNameTextField();
         personComboBox = peopleWindowView.getPersonComboBox();
 
-        addPersonButton = peopleWindowView.getAddPersonButton();
+        JButton addPersonButton = peopleWindowView.getAddPersonButton();
         addPersonButton.addActionListener(new AddPersonActionListener());//Добавляем слушателя кнопке добавления сотрудника
 
         if(peopleWindowView.getTitle().equals("Сотрудники")){//В случае общего списка сотрудников, оставляем только текстовое поле для добавления новго сотрудника
@@ -70,8 +69,8 @@ public class PeopleWindowController {
 
             allPersons = peopleService.findAllPeople();//Заполняем выпадающий список
             for(int i = 0; i < allPersons.size(); i++){
-                for(int j = 0; j < people.size(); j++){
-                    if (allPersons.get(i).getName().equals(people.get(j).getName())) {//Удалить из выпадающего списка тех сотрудников, которые уже работают
+                for (People person : people) {
+                    if (allPersons.get(i).getName().equals(person.getName())) {//Удалить из выпадающего списка тех сотрудников, которые уже работают
                         allPersons.remove(i);
                     }
                 }
@@ -82,7 +81,7 @@ public class PeopleWindowController {
         }
         personComboBox.setSelectedItem(null);
 
-        delPersonButton = peopleWindowView.getDelPersonButton();
+        JButton delPersonButton = peopleWindowView.getDelPersonButton();
         delPersonButton.addActionListener(new DelPeopleActionListener());//Добавили слушателя для кнопки удаления сотрудника
     }
 
@@ -141,7 +140,7 @@ public class PeopleWindowController {
                         case "Трансфер":{
                             if(showProgram.getTransfers().size() == 1){
                                 List<People> list = new ArrayList<>(showProgram.getTransfers());
-                                showProgram.removeTransfer(peopleService.findPeople(showProgram.getTransfers().get(0).getId()),0);
+                                showProgram.removeTransfer(0);
                                 list.add(peopleService.findPeople(allPersons.get(personComboBox.getSelectedIndex()).getId()));
                                 showProgram.setTransfers(list);
                                 showProgramService.updateShowProgram(showProgram);
@@ -183,7 +182,7 @@ public class PeopleWindowController {
                     peopleWindowView.dispose();
                     PeopleWindowController peopleWindowController = new PeopleWindowController(people);
                     peopleWindowController.execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
-                }catch (IndexOutOfBoundsException ex){
+                }catch (IndexOutOfBoundsException ignored){
                 }
             }if (personComboBox.isVisible()){
                 PeopleWindowController peopleWindowController = new PeopleWindowController();
@@ -202,7 +201,7 @@ public class PeopleWindowController {
                             break;
                         }
                         case "Трансфер":{
-                            showProgram.removeTransfer(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()),peopleList.getSelectedIndex());
+                            showProgram.removeTransfer(peopleList.getSelectedIndex());
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTransfers());
                             break;
@@ -212,7 +211,7 @@ public class PeopleWindowController {
 
                     peopleWindowView.dispose();
                     peopleWindowController.execut(new PeopleWindowView(peopleWindowView.getParentFrame(), peopleWindowView.getTitle()));
-                }catch (IndexOutOfBoundsException ex){
+                }catch (IndexOutOfBoundsException ignored){
                 }
             }
         }

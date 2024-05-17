@@ -27,10 +27,6 @@ public class Expense {
         return id;
     }
 
-    /*public void setId(int id) {
-        this.id = id;
-    }*/
-
     public int getSalary() {
         return salary;
     }
@@ -61,7 +57,7 @@ public class Expense {
         return "Expense{" +
                 "id=" + id +
                 ", salary=" + salary +
-                ", person=" + person +
+                //", person=" + person +
                 ", income=" + income +
                 '}';
     }

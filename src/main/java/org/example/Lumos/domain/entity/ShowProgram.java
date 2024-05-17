@@ -170,14 +170,8 @@ public class ShowProgram {
     public void addTransfer(People people){
         transfers.add(people);
     }
-    public void removeTransfer(People people,int id){
-        /*for(int i = 0; i < transfers.size(); i++){
-            if(people == transfers.get(i)){
-                transfers.remove(i);
-            }
-        }*/
+    public void removeTransfer(int id){
         transfers.remove(id);
-        //transfers.remove(people);
     }
 
     public void addIncome(Income income){
@@ -198,9 +192,9 @@ public class ShowProgram {
                 ", transferCnt=" + transferCnt +
                 ", artistSalary=" + artistSalary +
                 ", technicianSalary=" + technicianSalary +
-                ", transferCost=" + transferCost +
-                ", artists=" + artists +
-                ", technicians=" + technicians +
-                ", transfers=" + transfers;
+                ", transferCost=" + transferCost; //+
+                //", artists=" + artists +
+                //", technicians=" + technicians +
+               // ", transfers=" + transfers;
     }
 }

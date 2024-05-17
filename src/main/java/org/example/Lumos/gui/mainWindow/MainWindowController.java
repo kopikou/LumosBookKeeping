@@ -5,6 +5,8 @@ import org.example.Lumos.gui.orderWindow.OrderWindowController;
 import org.example.Lumos.gui.orderWindow.OrderWindowView;
 import org.example.Lumos.gui.peopleWindow.PeopleWindowController;
 import org.example.Lumos.gui.peopleWindow.PeopleWindowView;
+import org.example.Lumos.gui.salaryWindow.SalaryWindowController;
+import org.example.Lumos.gui.salaryWindow.SalaryWindowView;
 import org.example.Lumos.gui.showProgramWindow.ShowProgramWindowController;
 import org.example.Lumos.gui.showProgramWindow.ShowProgramWindowView;
 import org.example.Lumos.hibernate.services.ExpenseServiceImpl;
@@ -22,7 +24,6 @@ public class MainWindowController {
     private IncomeServiceImpl incomeService;
     private ExpenseServiceImpl expenseService;
     private MainWindowView mainWindowView;
-    private PeopleServiceImpl peopleService;
     public void execut(MainWindowView mainWindowView,IncomeServiceImpl incomeService, ExpenseServiceImpl expenseService){
         this.incomeService = incomeService;
         this.expenseService = expenseService;
@@ -48,11 +49,15 @@ public class MainWindowController {
         SeeShowProgramActionListener seeShowProgramActionListener = new SeeShowProgramActionListener(mainWindowView);
         seeShowProgramButton.addActionListener(seeShowProgramActionListener);
 
-        peopleService = new PeopleServiceImpl();
+        PeopleServiceImpl peopleService = new PeopleServiceImpl();
         //Назначили кнопке просмотра сотрудников слушателя
         JButton seeEmployeesButton = mainWindowView.getSeeEmployeesButton();
         SeeEmployeesActionListener seeEmployeesActionListener = new SeeEmployeesActionListener(mainWindowView, peopleService.findAllPeople());
         seeEmployeesButton.addActionListener(seeEmployeesActionListener);
+
+        JButton seeSalaryButton = mainWindowView.getSeeSalaryButton();
+        SeeSalaryActionListener seeSalaryActionListener = new SeeSalaryActionListener(mainWindowView);
+        seeSalaryButton.addActionListener(seeSalaryActionListener);
     }
 
     private static class AddOrderActionListener implements ActionListener{
@@ -77,7 +82,7 @@ public class MainWindowController {
                 incomeExpensesTableModel.delete(incomeExpensesTable.getSelectedRow());
                 mainWindowView.dispose();
                 execut(new MainWindowView(),incomeService,expenseService);
-            }catch (IndexOutOfBoundsException ex){
+            }catch (IndexOutOfBoundsException ignored){
             }
         }
     }
@@ -108,6 +113,19 @@ public class MainWindowController {
             //Открыть окно просмотра сотрудников
             PeopleWindowController peopleWindowController = new PeopleWindowController(people);
             peopleWindowController.execut(new PeopleWindowView(mainWindowView,"Сотрудники"));
+            mainWindowView.dispose();
+        }
+    }
+    private static class SeeSalaryActionListener implements ActionListener{
+        private final MainWindowView mainWindowView;
+        SeeSalaryActionListener(MainWindowView mainWindowView){
+            this.mainWindowView = mainWindowView;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //Открыть окно проспотра зарплат
+            SalaryWindowController salaryWindowController = new SalaryWindowController();
+            salaryWindowController.execut(new SalaryWindowView(mainWindowView));
             mainWindowView.dispose();
         }
     }
