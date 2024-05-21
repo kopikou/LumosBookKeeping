@@ -159,12 +159,18 @@ public class ShowProgram {
     public void removeArtist(People people){
         artists.remove(people);
     }
+    public void removeArtist(int id){
+        artists.remove(id);
+    }
 
     public void addTechnician(People people){
         technicians.add(people);
     }
     public void removeTechnician(People people){
         technicians.remove(people);
+    }
+    public void removeTechnician(int id){
+        technicians.remove(id);
     }
 
     public void addTransfer(People people){

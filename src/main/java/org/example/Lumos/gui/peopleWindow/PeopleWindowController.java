@@ -189,13 +189,15 @@ public class PeopleWindowController {
                 try{
                     switch (peopleWindowView.getTitle()){
                         case "Артисты":{
-                            showProgram.removeArtist(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()));
+                            //showProgram.removeArtist(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()));
+                            showProgram.removeArtist(peopleList.getSelectedIndex());
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getArtists());
                             break;
                         }
                         case "Техники":{
-                            showProgram.removeTechnician(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()));
+                            //showProgram.removeTechnician(peopleService.findPeople(people.get(peopleList.getSelectedIndex()).getId()));
+                            showProgram.removeTechnician(peopleList.getSelectedIndex());
                             showProgramService.updateShowProgram(showProgram);
                             peopleWindowController = new PeopleWindowController(showProgram,showProgram.getTechnicians());
                             break;
