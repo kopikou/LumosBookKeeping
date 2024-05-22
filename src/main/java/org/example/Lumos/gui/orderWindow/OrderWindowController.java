@@ -163,12 +163,14 @@ public class OrderWindowController {
             for(int i = 0; i < showPrograms.get(id).getArtistsCnt();i++){
                 if(artistsComboBoxes.get(i).getSelectedItem() == null){
                     emptyArtists = true;
+                    break;
                 }
             }
             //Есть ли дублирующиеся поля
             for(int i = 0; i < showPrograms.get(id).getArtistsCnt()-1;i++){
                 if(artistsComboBoxes.get(i).getSelectedItem() == artistsComboBoxes.get(i+1).getSelectedItem()){
                     sameArtists = true;
+                    break;
                 }
             }
 
@@ -176,11 +178,13 @@ public class OrderWindowController {
             for(int i = 0; i < showPrograms.get(id).getTechniciansCnt();i++){
                 if(techniciansComboBoxes.get(i).getSelectedItem() == null){
                     emptyTechnicians = true;
+                    break;
                 }
             }//Есть ли дублирующиеся поля
             for(int i = 0; i < showPrograms.get(id).getTechniciansCnt()-1;i++){
                 if(techniciansComboBoxes.get(i).getSelectedItem() == techniciansComboBoxes.get(i+1).getSelectedItem()){
                     sameTechnicians = true;
+                    break;
                 }
             }
 
@@ -188,11 +192,13 @@ public class OrderWindowController {
             for(int i = 0; i < showPrograms.get(id).getTransferCnt();i++){
                 if(transferComboBoxes.get(i).getSelectedItem() == null){
                     emptyTransfer = true;
+                    break;
                 }
             }//Есть ли дублирующиеся поля
             for(int i = 0; i < showPrograms.get(id).getTransferCnt()-1;i++){
                 if(transferComboBoxes.get(i).getSelectedItem() == transferComboBoxes.get(i+1).getSelectedItem()){
                     sameTransfer = true;
+                    break;
                 }
             }
 
@@ -202,6 +208,7 @@ public class OrderWindowController {
                 for (int j = 0; j < showPrograms.get(id).getTechniciansCnt();j++){
                     if(artistsComboBoxes.get(i).getSelectedItem() == techniciansComboBoxes.get(j).getSelectedItem()){
                         artistOrTechnician = true;
+                        break;
                     }
                 }
             }
@@ -282,7 +289,11 @@ public class OrderWindowController {
                 mainWindowController.execut(new MainWindowView(),incomeService,expenseService);
                 orderFrame.dispose();
             }else{
-                if(sameArtists || sameTechnicians || sameTransfer){
+                if(emptyArtists || emptyTechnicians || emptyTransfer || placeTextField.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(orderFrame,
+                            "Ошибка записи. Пожалуйста, заполните все поля.",
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }else if((sameArtists || sameTechnicians || sameTransfer)){
                     JOptionPane.showMessageDialog(orderFrame,
                             "Ошибка записи: дублирующиеся поля. Пожалуйста, исправьте дублирующиеся поля.",
                             "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -290,11 +301,11 @@ public class OrderWindowController {
                     JOptionPane.showMessageDialog(orderFrame,
                             "Ошибка записи: артист не может быть техником. Пожалуйста, исправьте поля.",
                             "Ошибка", JOptionPane.ERROR_MESSAGE);
-                }else {
+                }/*else {
                     JOptionPane.showMessageDialog(orderFrame,
                             "Ошибка записи. Пожалуйста, заполните все поля.",
                             "Ошибка", JOptionPane.ERROR_MESSAGE);
-                }
+                }*/
             }
         }
     }
